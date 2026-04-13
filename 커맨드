@@ -1,1 +1,0 @@
-@local PowerShell 기준으로 Invoke-RestMethod 사용해서 JSON Body 직접 보내는 방식으로 만들어줘. 파일 방식 쓰지마.
