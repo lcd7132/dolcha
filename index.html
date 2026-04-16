@@ -1,0 +1,1081 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>후쿠오카 2박3일 — 30개월 아기와 함께하는 여행</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&display=swap">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Geist', 'sans-serif'] },
+          colors: {
+            neutral: {
+              50: '#fafafa', 100: '#f5f5f5', 200: '#e5e5e5',
+              300: '#d4d4d4', 400: '#a3a3a3', 500: '#737373',
+              600: '#525252', 700: '#404040', 800: '#262626', 900: '#171717'
+            }
+          },
+          animation: {
+            'fade-up': 'fadeUp 0.8s ease-out forwards',
+            'clip-in': 'clipIn 1.2s cubic-bezier(0.25,1,0.5,1) both',
+          },
+          keyframes: {
+            fadeUp: {
+              '0%': { opacity: 0, transform: 'translateY(20px)' },
+              '100%': { opacity: 1, transform: 'translateY(0)' }
+            },
+            clipIn: {
+              '0%': { opacity: 0, clipPath: 'inset(0 0 100% 0)' },
+              '100%': { opacity: 1, clipPath: 'inset(0 0 0 0)' }
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Geist', sans-serif; }
+    .day-section:target { scroll-margin-top: 80px; }
+    .checklist-item input:checked + label { text-decoration: line-through; color: #a3a3a3; }
+    .timeline-dot::before {
+      content: '';
+      position: absolute;
+      left: -29px;
+      top: 6px;
+      width: 14px;
+      height: 14px;
+      background: #2563eb;
+      border-radius: 50%;
+      border: 3px solid #eff6ff;
+      z-index: 10;
+    }
+    .timeline-dot::after {
+      content: '';
+      position: absolute;
+      left: -23px;
+      top: 20px;
+      width: 2px;
+      height: calc(100% + 12px);
+      background: #e5e5e5;
+    }
+    .timeline-dot:last-child::after { display: none; }
+    .toast {
+      animation: toastIn 0.4s ease-out, toastOut 0.4s ease-in 2s forwards;
+    }
+    @keyframes toastIn {
+      0% { transform: translateY(20px); opacity: 0; }
+      100% { transform: translateY(0); opacity: 1; }
+    }
+    @keyframes toastOut {
+      0% { opacity: 1; }
+      100% { opacity: 0; }
+    }
+  </style>
+</head>
+<body class="bg-neutral-50 text-neutral-900 antialiased">
+
+  <!-- Navigation -->
+  <nav class="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl bg-white/70 border-b border-neutral-200/50">
+    <div class="max-w-[1200px] mx-auto px-6 h-16 flex items-center justify-between">
+      <a href="#" class="flex items-center gap-2">
+        <iconify-icon icon="mdi:airplane-takeoff" class="text-xl text-blue-600"></iconify-icon>
+        <span class="font-semibold tracking-tight">아기랑 후쿠오카</span>
+      </a>
+      <div class="hidden md:flex items-center gap-8 text-sm font-medium text-neutral-500">
+        <a href="#preparation" class="hover:text-neutral-900 transition-colors">준비물</a>
+        <a href="#day1" class="hover:text-neutral-900 transition-colors">1일차</a>
+        <a href="#day2" class="hover:text-neutral-900 transition-colors">2일차</a>
+        <a href="#day3" class="hover:text-neutral-900 transition-colors">3일차</a>
+        <a href="#tips" class="hover:text-neutral-900 transition-colors">아기팁</a>
+        <a href="#restaurants" class="hover:text-neutral-900 transition-colors">식당</a>
+      </div>
+      <button id="mobileMenuBtn" class="md:hidden p-2">
+        <iconify-icon icon="mdi:menu" class="text-2xl"></iconify-icon>
+      </button>
+    </div>
+    <!-- Mobile Menu -->
+    <div id="mobileMenu" class="hidden md:hidden bg-white/95 backdrop-blur-xl border-b border-neutral-200/50 px-6 pb-4">
+      <div class="flex flex-col gap-3 text-sm font-medium text-neutral-600">
+        <a href="#preparation" class="py-2 hover:text-neutral-900 transition-colors">준비물</a>
+        <a href="#day1" class="py-2 hover:text-neutral-900 transition-colors">1일차</a>
+        <a href="#day2" class="py-2 hover:text-neutral-900 transition-colors">2일차</a>
+        <a href="#day3" class="py-2 hover:text-neutral-900 transition-colors">3일차</a>
+        <a href="#tips" class="py-2 hover:text-neutral-900 transition-colors">아기팁</a>
+        <a href="#restaurants" class="py-2 hover:text-neutral-900 transition-colors">식당</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="pt-24 pb-12 px-6 relative overflow-hidden">
+    <div class="absolute inset-0 -z-10">
+      <div class="absolute top-20 left-1/4 w-72 h-72 bg-blue-500/5 rounded-full blur-3xl"></div>
+      <div class="absolute top-40 right-1/4 w-96 h-96 bg-emerald-500/5 rounded-full blur-3xl"></div>
+    </div>
+    <div class="max-w-[1200px] mx-auto">
+      <div class="grid lg:grid-cols-12 gap-8 items-center">
+        <!-- Left -->
+        <div class="lg:col-span-7 space-y-6">
+          <div class="inline-flex items-center gap-2 px-4 py-2 bg-blue-50 rounded-full text-blue-600 text-sm font-medium">
+            <iconify-icon icon="mdi:baby-carriage" class="text-lg"></iconify-icon>
+            30개월 아기 동반 여행 가이드
+          </div>
+          <h1 class="text-5xl lg:text-7xl font-medium tracking-tight leading-[0.95]">
+            후쿠오카<br>
+            <span class="text-neutral-400">2박 3일</span>
+          </h1>
+          <p class="text-neutral-500 text-lg leading-relaxed max-w-lg">
+            30개월 아기와 함께하는 첫 해외여행, 걱정 반 기대 반으로 준비한 후쿠오카 여행기입니다. 아기 친화적 코스와 실전 팁을 모았어요.
+          </p>
+          <div class="flex flex-wrap gap-3">
+            <a href="#day1" class="inline-flex items-center gap-2 px-6 py-3 bg-neutral-900 text-white rounded-xl text-sm font-medium hover:scale-[0.975] transition-transform duration-400">
+              일정 보기
+              <iconify-icon icon="mdi:arrow-down" class="text-base"></iconify-icon>
+            </a>
+            <a href="#preparation" class="inline-flex items-center gap-2 px-6 py-3 bg-white border border-neutral-200 rounded-xl text-sm font-medium hover:bg-neutral-50 transition-colors">
+              준비물 체크
+              <iconify-icon icon="mdi:clipboard-check-outline" class="text-base"></iconify-icon>
+            </a>
+          </div>
+          <!-- Quick Info Cards -->
+          <div class="grid grid-cols-3 gap-3 pt-4">
+            <div class="bg-white rounded-xl p-4 border border-neutral-200/50 shadow-sm">
+              <div class="text-2xl font-semibold text-blue-600">1:40</div>
+              <div class="text-xs text-neutral-400 mt-1">비행시간(분)</div>
+            </div>
+            <div class="bg-white rounded-xl p-4 border border-neutral-200/50 shadow-sm">
+              <div class="text-2xl font-semibold text-emerald-600">2박</div>
+              <div class="text-xs text-neutral-400 mt-1">숙박 일정</div>
+            </div>
+            <div class="bg-white rounded-xl p-4 border border-neutral-200/50 shadow-sm">
+              <div class="text-2xl font-semibold text-purple-600">30m</div>
+              <div class="text-xs text-neutral-400 mt-1">아기 월령</div>
+            </div>
+          </div>
+        </div>
+        <!-- Right Image -->
+        <div class="lg:col-span-5 relative">
+          <div class="rounded-2xl overflow-hidden shadow-[0_24px_60px_-32px_rgba(15,23,42,0.35)]">
+            <img src="https://picsum.photos/seed/fukuoka-canal/600/720.jpg" alt="후쿠오카 운하" class="w-full h-[400px] lg:h-[520px] object-cover">
+          </div>
+          <div class="absolute -bottom-4 -left-4 bg-white rounded-xl p-4 shadow-lg border border-neutral-100 flex items-center gap-3">
+            <div class="w-10 h-10 bg-orange-100 rounded-lg flex items-center justify-center">
+              <iconify-icon icon="mdi:weather-sunny" class="text-xl text-orange-500"></iconify-icon>
+            </div>
+            <div>
+              <div class="text-sm font-semibold">연중 온화</div>
+              <div class="text-xs text-neutral-400">평균 15~28°C</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Overview Strip -->
+  <section class="py-6 px-6 border-y border-neutral-200/50 bg-white">
+    <div class="max-w-[1200px] mx-auto grid grid-cols-2 md:grid-cols-5 gap-6 text-center">
+      <div>
+        <iconify-icon icon="mdi:airplane" class="text-2xl text-blue-600"></iconify-icon>
+        <div class="text-sm font-medium mt-1">인천→후쿠오카</div>
+        <div class="text-xs text-neutral-400">직항 1시간 40분</div>
+      </div>
+      <div>
+        <iconify-icon icon="mdi:train" class="text-2xl text-emerald-600"></iconify-icon>
+        <div class="text-sm font-medium mt-1">공항→덴진</div>
+        <div class="text-xs text-neutral-400">지하철 12분</div>
+      </div>
+      <div>
+        <iconify-icon icon="mdi:currency-jpy" class="text-2xl text-orange-500"></iconify-icon>
+        <div class="text-sm font-medium mt-1">환율</div>
+        <div class="text-xs text-neutral-400">100엔 ≈ 920원</div>
+      </div>
+      <div>
+        <iconify-icon icon="mdi:wifi" class="text-2xl text-purple-600"></iconify-icon>
+        <div class="text-sm font-medium mt-1">포켓와이파이</div>
+        <div class="text-xs text-neutral-400">1일 3,000원대</div>
+      </div>
+      <div class="col-span-2 md:col-span-1">
+        <iconify-icon icon="mdi:card-account-details" class="text-2xl text-pink-600"></iconify-icon>
+        <div class="text-sm font-medium mt-1">교통카드</div>
+        <div class="text-xs text-neutral-400">하야카카 필수!</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Preparation Section -->
+  <section id="preparation" class="py-20 px-6">
+    <div class="max-w-[1200px] mx-auto">
+      <div class="text-center mb-12">
+        <div class="inline-flex items-center gap-2 px-3 py-1.5 bg-orange-50 rounded-full text-orange-600 text-xs font-medium mb-4">
+          <iconify-icon icon="mdi:package-variant-closed"></iconify-icon>
+          PREPARATION
+        </div>
+        <h2 class="text-3xl lg:text-4xl font-medium tracking-tight">아기 여행 준비물 체크리스트</h2>
+        <p class="text-neutral-400 mt-3">체크박스를 클릭하면 준비 완료 표시가 됩니다</p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- 카테고리 1: 필수 서류 -->
+        <div class="bg-white rounded-2xl p-6 border border-neutral-200/50 shadow-sm hover:shadow-lg transition-shadow duration-500">
+          <div class="flex items-center gap-3 mb-5">
+            <div class="w-10 h-10 bg-blue-100 rounded-xl flex items-center justify-center">
+              <iconify-icon icon="mdi:passport" class="text-xl text-blue-600"></iconify-icon>
+            </div>
+            <h3 class="font-semibold text-lg">필수 서류</h3>
+          </div>
+          <div class="space-y-3">
+            <div class="checklist-item flex items-center gap-3">
+              <input type="checkbox" id="doc1" class="w-4 h-4 accent-blue-600 rounded">
+              <label for="doc1" class="text-sm text-neutral-600 cursor-pointer">여권 (아기 본인 여권 필수)</label>
+            </div>
+            <div class="checklist-item flex items-center gap-3">
+              <input type="checkbox" id="doc2" class="w-4 h-4 accent-blue-600 rounded">
+              <label for="doc2" class="text-sm text-neutral-600 cursor-pointer">항공권 e-티켓 출력</label>
+            </div>
+            <div class="checklist-item flex items-center gap-3">
+              <input type="checkbox" id="doc3" class="w-4 h-4 accent-blue-600 rounded">
+              <label for="doc3" class="text-sm text-neutral-600 cursor-pointer">숙소 예약 확인서</label>
+            </div>
+            <div class="checklist-item flex items-center gap-3">
+              <input type="checkbox" id="doc4" class="w-4 h-4 accent-blue-600 rounded">
+              <label for="doc4" class="text-sm text-neutral-600 cursor-pointer">여행자보험 증서</label>
+            </div>
+            <div class="checklist-item flex items-center gap-3">
+              <input type="checkbox" id="doc5" class="w-4 h-4 accent-blue-600 rounded">
+              <label for="doc5" class="text-sm text-neutral-600 cursor-pointer">가족관계증명서 (영문)</label>
+            </div>
+          </div>
+        </div>
+
+        <!-- 카테고리 2: 아기 용품 -->
+        <div class="bg-white rounded-2xl p-6 border border-neutral-200/50 shadow-sm hover:shadow-lg transition-shadow duration-500">
+          <div class="flex items-center gap-3 mb-5">
+            <div class="w-10 h-10 bg-pink-100 rounded-xl flex items-center justify-center">
+              <iconify-icon icon="mdi:baby-face-outline" class="text-xl text-pink-600"></iconify-icon>
+            </div>
+            <h3 class="font-semibold text-lg">아기 용품</h3>
+          </div>
+          <div class="space-y-3">
+            <div class="checklist-item flex items-center gap-3">
+              <input type="checkbox" id="baby1" class="w-4 h-4 accent-pink-600 rounded">
+              <label for="baby1" class="text-sm text-neutral-600 cursor-pointer">기저귀 (여유 있게 1.5배)</label>
+            </div>
+            <div class="checklist-item flex items-center gap-3">
+              <input type="checkbox" id="baby2" class="w-4 h-4 accent-pink-600 rounded">
+              <label for="baby2" class="text-sm text-neutral-600 cursor-pointer">물티슈 대용 휴지</label>
+            </div>
+            <div class="checklist-item flex items-center gap-3">
+              <input type="checkbox" id="baby3" class="w-4 h-4 accent-pink-600 rounded">
+              <label for="baby3" class="text-sm text-neutral-600 cursor-pointer">젖병 / 물병 / 컵</label>
+            </div>
+            <div class="checklist-item flex items-center gap-3">
+              <input type="checkbox" id="baby4" class="w-4 h-4 accent-pink-600 rounded">
+              <label for="baby4" class="text-sm text-neutral-600 cursor-pointer">아기 간식 (한국 것 필수)</label>
+            </div>
+            <div class="checklist-item flex items-center gap-3">
+              <input type="checkbox" id="baby5" class="w-4 h-4 accent-pink-600 rounded">
+              <label for="baby5" class="text-sm text-neutral-600 cursor-pointer">아기 처방약 / 해열제</label>
+            </div>
+            <div class="checklist-item flex items-center gap-3">
+              <input type="checkbox" id="baby6" class="w-4 h-4 accent-pink-600 rounded">
+              <label for="baby6" class="text-sm text-neutral-600 cursor-pointer">유모차 (가벼운 접이식)</label>
+            </div>
+            <div class="checklist-item flex items-center gap-3">
+              <input type="checkbox" id="baby7" class="w-4 h-4 accent-pink-600 rounded">
+              <label for="baby7" class="text-sm text-neutral-600 cursor-pointer">아기띠 (케리어)</label>
+            </div>
+          </div>
+        </div>
+
+        <!-- 카테고리 3: 의류 & 잡화 -->
+        <div class="bg-white rounded-2xl p-6 border border-neutral-200/50 shadow-sm hover:shadow-lg transition-shadow duration-500">
+          <div class="flex items-center gap-3 mb-5">
+            <div class="w-10 h-10 bg-emerald-100 rounded-xl flex items-center justify-center">
+              <iconify-icon icon="mdi:tshirt-crew-outline" class="text-xl text-emerald-600"></iconify-icon>
+            </div>
+            <h3 class="font-semibold text-lg">의류 & 잡화</h3>
+          </div>
+          <div class="space-y-3">
+            <div class="checklist-item flex items-center gap-3">
+              <input type="checkbox" id="cloth1" class="w-4 h-4 accent-emerald-600 rounded">
+              <label for="cloth1" class="text-sm text-neutral-600 cursor-pointer">겉옷 (일교차 대비 얇은 재킷)</label>
+            </div>
+            <div class="checklist-item flex items-center gap-3">
+              <input type="checkbox" id="cloth2" class="w-4 h-4 accent-emerald-600 rounded">
+              <label for="cloth2" class="text-sm text-neutral-600 cursor-pointer">아기 여벌 옷 (하루 2벌씩)</label>
+            </div>
+            <div class="checklist-item flex items-center gap-3">
+              <input type="checkbox" id="cloth3" class="w-4 h-4 accent-emerald-600 rounded">
+              <label for="cloth3" class="text-sm text-neutral-600 cursor-pointer">편한 신발 / 양말</label>
+            </div>
+            <div class="checklist-item flex items-center gap-3">
+              <input type="checkbox" id="cloth4" class="w-4 h-4 accent-emerald-600 rounded">
+              <label for="cloth4" class="text-sm text-neutral-600 cursor-pointer">햇볕 가리개 모자</label>
+            </div>
+            <div class="checklist-item flex items-center gap-3">
+              <input type="checkbox" id="cloth5" class="w-4 h-4 accent-emerald-600 rounded">
+              <label for="cloth5" class="text-sm text-neutral-600 cursor-pointer">젖병 세정제 / 브러시</label>
+            </div>
+            <div class="checklist-item flex items-center gap-3">
+              <input type="checkbox" id="cloth6" class="w-4 h-4 accent-emerald-600 rounded">
+              <label for="cloth6" class="text-sm text-neutral-600 cursor-pointer">비닐봉지 (더러운 옷용)</label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Day 1 -->
+  <section id="day1" class="day-section py-20 px-6 bg-white">
+    <div class="max-w-[1200px] mx-auto">
+      <div class="flex items-center gap-4 mb-12">
+        <div class="w-14 h-14 bg-blue-600 rounded-2xl flex items-center justify-center text-white text-xl font-semibold shadow-[0_8px_24px_-8px_rgba(37,99,235,0.5)]">1</div>
+        <div>
+          <h2 class="text-3xl lg:text-4xl font-medium tracking-tight">DAY 1</h2>
+          <p class="text-neutral-400">인천 → 후쿠오카 공항 → 덴진 숙소 → 오호리 공원 → 캐널시티</p>
+        </div>
+      </div>
+
+      <div class="grid lg:grid-cols-12 gap-8">
+        <!-- Timeline -->
+        <div class="lg:col-span-7 relative pl-8 border-l-0">
+          <div class="space-y-8">
+            <!-- 항공 -->
+            <div class="timeline-dot relative">
+              <div class="flex items-center gap-3 mb-2">
+                <span class="text-xs font-medium text-blue-600 bg-blue-50 px-2 py-0.5 rounded">오전</span>
+                <span class="text-sm text-neutral-400">08:00 출발</span>
+              </div>
+              <h4 class="font-semibold text-lg mb-2">인천공항 → 후쿠오카공항</h4>
+              <p class="text-sm text-neutral-500 leading-relaxed">
+                아침 항공으로 출발! 공항에서 체크인 시 아기 유모차는 수하물로 부치고, 아기띠로 이동하세요. 탑승 시 아기용 귀마개(이어플러그) 꼭 챙기세요. 비행시간은 짧아 1시간 40분이면 도착합니다.
+              </p>
+              <div class="mt-3 flex flex-wrap gap-2">
+                <span class="px-2 py-1 bg-neutral-100 rounded text-xs text-neutral-500">✈️ 직항 1:40</span>
+                <span class="px-2 py-1 bg-neutral-100 rounded text-xs text-neutral-500">👶 귀마개 필수</span>
+                <span class="px-2 py-1 bg-neutral-100 rounded text-xs text-neutral-500">🍼 이착륙 시 수분섭취</span>
+              </div>
+            </div>
+
+            <!-- 공항 → 숙소 -->
+            <div class="timeline-dot relative">
+              <div class="flex items-center gap-3 mb-2">
+                <span class="text-xs font-medium text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded">오전</span>
+                <span class="text-sm text-neutral-400">11:00</span>
+              </div>
+              <h4 class="font-semibold text-lg mb-2">공항 → 덴진 숙소 이동</h4>
+              <p class="text-sm text-neutral-500 leading-relaxed">
+                후쿠오카공항은 시내에서 매우 가깝습니다! 지하철 공항선으로 덴진까지 약 12분. 유모차 엘리베이터 위치는 역마다 있지만 미리 확인하면 좋습니다. 하야카카(교통카드)를 공항에서 먼저 구매하세요.
+              </p>
+              <div class="mt-3 flex flex-wrap gap-2">
+                <span class="px-2 py-1 bg-neutral-100 rounded text-xs text-neutral-500">🚇 지하철 12분</span>
+                <span class="px-2 py-1 bg-neutral-100 rounded text-xs text-neutral-500">💳 하야카카 구매</span>
+                <span class="px-2 py-1 bg-neutral-100 rounded text-xs text-neutral-500">🏢 엘리베이터 확인</span>
+              </div>
+            </div>
+
+            <!-- 오호리 공원 -->
+            <div class="timeline-dot relative">
+              <div class="flex items-center gap-3 mb-2">
+                <span class="text-xs font-medium text-orange-600 bg-orange-50 px-2 py-0.5 rounded">오후</span>
+                <span class="text-sm text-neutral-400">13:00</span>
+              </div>
+              <h4 class="font-semibold text-lg mb-2">오호리 공원 🌳 아기 산책 최고!</h4>
+              <p class="text-sm text-neutral-500 leading-relaxed">
+                후쿠오카 시민의 후원인 오호리 공원은 아기 유모차 산책에 최적화되어 있습니다. 넓은 호수 둘레길이 평탄하고, 일본식 정원도 있어 산책하기 좋습니다. 아기가 뛰어놀 잔디밭도 넓어요. 점심은 공원 근처 카페에서 가볍게!
+              </p>
+              <div class="mt-3 flex flex-wrap gap-2">
+                <span class="px-2 py-1 bg-neutral-100 rounded text-xs text-neutral-500">🦆 오리 먹이주기</span>
+                <span class="px-2 py-1 bg-neutral-100 rounded text-xs text-neutral-500">🧺 피크닉 가능</span>
+                <span class="px-2 py-1 bg-neutral-100 rounded text-xs text-neutral-500">♿ 유모차 접근성 최상</span>
+              </div>
+            </div>
+
+            <!-- 캐널시티 -->
+            <div class="timeline-dot relative">
+              <div class="flex items-center gap-3 mb-2">
+                <span class="text-xs font-medium text-purple-600 bg-purple-50 px-2 py-0.5 rounded">저녁</span>
+                <span class="text-sm text-neutral-400">17:00</span>
+              </div>
+              <h4 class="font-semibold text-lg mb-2">캐널시티 하카타 🛍️</h4>
+              <p class="text-sm text-neutral-500 leading-relaxed">
+                복합 쇼핑몰로 아기와 다니기 좋습니다. 실내라 날씨 상관없고, 라모네 광장의 분수쇼가 아기 눈길을 사로잡아요. 4F에 키즈플로어가 있어 놀이공간 활용 가능! 저녁은 라멘 스타디움에서 맛있게~
+              </p>
+              <div class="mt-3 flex flex-wrap gap-2">
+                <span class="px-2 py-1 bg-neutral-100 rounded text-xs text-neutral-500">🎪 분수쇼</span>
+                <span class="px-2 py-1 bg-neutral-100 rounded text-xs text-neutral-500">👶 키즈플로어 4F</span>
+                <span class="px-2 py-1 bg-neutral-100 rounded text-xs text-neutral-500">🍜 라멘 스타디움</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Side Image -->
+        <div class="lg:col-span-5 space-y-6">
+          <div class="rounded-2xl overflow-hidden shadow-sm">
+            <img src="https://picsum.photos/seed/ohori-park/600/400.jpg" alt="오호리 공원" class="w-full h-56 object-cover">
+            <div class="p-4 bg-neutral-50">
+              <p class="text-sm font-medium">오호리 공원</p>
+              <p class="text-xs text-neutral-400">아기 유모차 산책의 정석</p>
+            </div>
+          </div>
+          <div class="rounded-2xl overflow-hidden shadow-sm">
+            <img src="https://picsum.photos/seed/canal-city-fukuoka/600/400.jpg" alt="캐널시티 하카타" class="w-full h-56 object-cover">
+            <div class="p-4 bg-neutral-50">
+              <p class="text-sm font-medium">캐널시티 하카타</p>
+              <p class="text-xs text-neutral-400">쇼핑+식사+아기놀이 한곳에</p>
+            </div>
+          </div>
+          <!-- 꿀팁 박스 -->
+          <div class="bg-blue-50 rounded-2xl p-6 border border-blue-100">
+            <div class="flex items-center gap-2 mb-3">
+              <iconify-icon icon="mdi:lightbulb-outline" class="text-lg text-blue-600"></iconify-icon>
+              <span class="text-sm font-semibold text-blue-800">DAY 1 꿀팁</span>
+            </div>
+            <p class="text-sm text-blue-700 leading-relaxed">
+              첫날은 무리하지 마세요! 아기가 비행 피로를 느낄 수 있어 일정을 여유롭게 잡는 게 핵심입니다. 숙소 체크인 후 낮잠 시간을 꼭 확보해주세요.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Day 2 -->
+  <section id="day2" class="day-section py-20 px-6 bg-neutral-50">
+    <div class="max-w-[1200px] mx-auto">
+      <div class="flex items-center gap-4 mb-12">
+        <div class="w-14 h-14 bg-emerald-600 rounded-2xl flex items-center justify-center text-white text-xl font-semibold shadow-[0_8px_24px_-8px_rgba(5,150,105,0.5)]">2</div>
+        <div>
+          <h2 class="text-3xl lg:text-4xl font-medium tracking-tight">DAY 2</h2>
+          <p class="text-neutral-400">마린월드 → 우미노나카미치 → 하카타 역 → 나카스 야타이</p>
+        </div>
+      </div>
+
+      <div class="grid lg:grid-cols-12 gap-8">
+        <!-- Side Image (왼쪽) -->
+        <div class="lg:col-span-5 space-y-6 order-2 lg:order-1">
+          <div class="rounded-2xl overflow-hidden shadow-sm">
+            <img src="https://picsum.photos/seed/marineworld-aquarium/600/400.jpg" alt="마린월드" class="w-full h-56 object-cover">
+            <div class="p-4 bg-white">
+              <p class="text-sm font-medium">마린월드 우미노나카미치</p>
+              <p class="text-xs text-neutral-400">아기가 좋아하는 물고기 체험</p>
+            </div>
+          </div>
+          <div class="rounded-2xl overflow-hidden shadow-sm">
+            <img src="https://picsum.photos/seed/uminonakamichi-seaside/600/400.jpg" alt="우미노나카미치" class="w-full h-56 object-cover">
+            <div class="p-4 bg-white">
+              <p class="text-sm font-medium">우미노나카미치 해변공원</p>
+              <p class="text-xs text-neutral-400">넓은 잔디밭에서 자유롭게 놀기</p>
+            </div>
+          </div>
+          <div class="bg-emerald-50 rounded-2xl p-6 border border-emerald-100">
+            <div class="flex items-center gap-2 mb-3">
+              <iconify-icon icon="mdi:lightbulb-outline" class="text-lg text-emerald-600"></iconify-icon>
+              <span class="text-sm font-semibold text-emerald-800">DAY 2 꿀팁</span>
+            </div>
+            <p class="text-sm text-emerald-700 leading-relaxed">
+              마린월드와 해변공원이 같은 위치에 있어 이동이 없습니다! 아기 낮잠 시간에 맞춰 수족관 관람 → 야외 놀이 순서로 조정하세요. 돌아올 때 페리를 타면 아기가 배를 보며 신나해요 🚢
+            </p>
+          </div>
+        </div>
+
+        <!-- Timeline (오른쪽) -->
+        <div class="lg:col-span-7 relative pl-8 order-1 lg:order-2">
+          <div class="space-y-8">
+            <div class="timeline-dot relative">
+              <div class="flex items-center gap-3 mb-2">
+                <span class="text-xs font-medium text-blue-600 bg-blue-50 px-2 py-0.5 rounded">오전</span>
+                <span class="text-sm text-neutral-400">09:30</span>
+              </div>
+              <h4 class="font-semibold text-lg mb-2">마린월드 우미노나카미치 🐟</h4>
+              <p class="text-sm text-neutral-500 leading-relaxed">
+                30개월 아기에게 수족관은 최고의 놀이터! 돌고래 쇼는 아기가 푹 빠질 확률 99%입니다. 수조 앞 벤치에서 아기가 일어서서 구경할 수 있어 좋아요. 10:00, 13:00 돌고래 쇼 시간 맞춰 가세요. 유모차 대여도 가능합니다.
+              </p>
+              <div class="mt-3 flex flex-wrap gap-2">
+                <span class="px-2 py-1 bg-neutral-100 rounded text-xs text-neutral-500">🐬 돌고래 쇼</span>
+                <span class="px-2 py-1 bg-neutral-100 rounded text-xs text-neutral-500">🦈 터널 수조</span>
+                <span class="px-2 py-1 bg-neutral-100 rounded text-xs text-neutral-500">👶 유모차 대여 O</span>
+                <span class="px-2 py-1 bg-neutral-100 rounded text-xs text-neutral-500">🎟️ 성인 2,500엔</span>
+              </div>
+            </div>
+
+            <div class="timeline-dot relative">
+              <div class="flex items-center gap-3 mb-2">
+                <span class="text-xs font-medium text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded">오전-오후</span>
+                <span class="text-sm text-neutral-400">11:30</span>
+              </div>
+              <h4 class="font-semibold text-lg mb-2">우미노나카미치 해변공원 🌊</h4>
+              <p class="text-sm text-neutral-500 leading-relaxed">
+                마린월드 바로 옆! 계절마다 꽃밭이 다르고, 아이 놀이터가 여러 곳 있어요. '와쿠와쿠 랜드'는 어린이 놀이시설이 집중된 곳으로 30개월 아기에게 딱 맞는 시설이 많습니다. 피크닉 매트를 깔고 아기가 뛰어놀게 해주세요.
+              </p>
+              <div class="mt-3 flex flex-wrap gap-2">
+                <span class="px-2 py-1 bg-neutral-100 rounded text-xs text-neutral-500">🌸 계절 꽃밭</span>
+                <span class="px-2 py-1 bg-neutral-100 rounded text-xs text-neutral-500">🧸 와쿠와쿠 랜드</span>
+                <span class="px-2 py-1 bg-neutral-100 rounded text-xs text-neutral-500">🧺 피크닉 에리어</span>
+              </div>
+            </div>
+
+            <div class="timeline-dot relative">
+              <div class="flex items-center gap-3 mb-2">
+                <span class="text-xs font-medium text-orange-600 bg-orange-50 px-2 py-0.5 rounded">오후</span>
+                <span class="text-sm text-neutral-400">15:00</span>
+              </div>
+              <h4 class="font-semibold text-lg mb-2">하카타 역 & 주변 쇼핑 🛒</h4>
+              <p class="text-sm text-neutral-500 leading-relaxed">
+                아기 낮잠 후 하카타 역으로 이동. 역 내 AMU 플라자에는 키즈 룸이 있어 아기가 놀 수 있습니다. 층별로 엘리베이터가 잘 되어 있어 유모차 이동도 편해요. 과자·간식 소핑도 여기서!
+              </p>
+              <div class="mt-3 flex flex-wrap gap-2">
+                <span class="px-2 py-1 bg-neutral-100 rounded text-xs text-neutral-500">🏪 AMU 플라자</span>
+                <span class="px-2 py-1 bg-neutral-100 rounded text-xs text-neutral-500">👶 키즈룸 있음</span>
+                <span class="px-2 py-1 bg-neutral-100 rounded text-xs text-neutral-500">🍰 디저트 소핑</span>
+              </div>
+            </div>
+
+            <div class="timeline-dot relative">
+              <div class="flex items-center gap-3 mb-2">
+                <span class="text-xs font-medium text-purple-600 bg-purple-50 px-2 py-0.5 rounded">저녁</span>
+                <span class="text-sm text-neutral-400">18:00</span>
+              </div>
+              <h4 class="font-semibold text-lg mb-2">나카스 야타이 🍢</h4>
+              <p class="text-sm text-neutral-500 leading-relaxed">
+                후쿠오카의 명물 야타이(노점)! 아기랑은 앉아서 먹기 힘들 수 있어, 테이크아웃으로 사서 숙소에서 먹는 걸 추천합니다. 야끼소바, 오코노미야키 등 아기도 먹을 수 있는 메뉴가 많아요. 분위기 구경만 해도 좋습니다!
+              </p>
+              <div class="mt-3 flex flex-wrap gap-2">
+                <span class="px-2 py-1 bg-neutral-100 rounded text-xs text-neutral-500">🍢 야끼소바</span>
+                <span class="px-2 py-1 bg-neutral-100 rounded text-xs text-neutral-500">🥟 교자</span>
+                <span class="px-2 py-1 bg-neutral-100 rounded text-xs text-neutral-500">📦 테이크아웃 추천</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Day 3 -->
+  <section id="day3" class="day-section py-20 px-6 bg-white">
+    <div class="max-w-[1200px] mx-auto">
+      <div class="flex items-center gap-4 mb-12">
+        <div class="w-14 h-14 bg-orange-500 rounded-2xl flex items-center justify-center text-white text-xl font-semibold shadow-[0_8px_24px_-8px_rgba(234,88,12,0.5)]">3</div>
+        <div>
+          <h2 class="text-3xl lg:text-4xl font-medium tracking-tight">DAY 3</h2>
+          <p class="text-neutral-400">다자이후 텐만구 → 규탕 → 공항 → 귀국</p>
+        </div>
+      </div>
+
+      <div class="grid lg:grid-cols-12 gap-8">
+        <div class="lg:col-span-7 relative pl-8">
+          <div class="space-y-8">
+            <div class="timeline-dot relative">
+              <div class="flex items-center gap-3 mb-2">
+                <span class="text-xs font-medium text-blue-600 bg-blue-50 px-2 py-0.5 rounded">오전</span>
+                <span class="text-sm text-neutral-400">09:00</span>
+              </div>
+              <h4 class="font-semibold text-lg mb-2">다자이후 텐만구 ⛩️</h4>
+              <p class="text-sm text-neutral-500 leading-relaxed">
+                학문의 신을 모신 신사! 30개월 아기에게는 신사보다 참배로(가로수길)가 더 재밌습니다. 매점에서 아기 간식 구경하고, 신사 앞 잉어 먹이주기 체험도 가능합니다. 유모차로 참배로 이동 가능, 신사 본전 앞 계단은 아기띠로.
+              </p>
+              <div class="mt-3 flex flex-wrap gap-2">
+                <span class="px-2 py-1 bg-neutral-100 rounded text-xs text-neutral-500">⛩️ 신사 참배</span>
+                <span class="px-2 py-1 bg-neutral-100 rounded text-xs text-neutral-500">🐟 잉어 먹이주기</span>
+                <span class="px-2 py-1 bg-neutral-100 rounded text-xs text-neutral-500">🍡 참배로 간식</span>
+                <span class="px-2 py-1 bg-neutral-100 rounded text-xs text-neutral-500">🚃 니시테쓰 전차 40분</span>
+              </div>
+            </div>
+
+            <div class="timeline-dot relative">
+              <div class="flex items-center gap-3 mb-2">
+                <span class="text-xs font-medium text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded">오전</span>
+                <span class="text-sm text-neutral-400">10:30</span>
+              </div>
+              <h4 class="font-semibold text-lg mb-2">규탕 (다자이후) ☕</h4>
+              <p class="text-sm text-neutral-500 leading-relaxed">
+                다자이후 텐만구 바로 앞에 있는 스타벅스 리저브! 유명 건축가 구마 겐고가 설계한 목조 건축으로, 일본에서 가장 아름다운 스타벅스로 꼽힙니다. 아기 유모차도 들어갈 수 있고, 커피 한 잔 여유롭게 즐기세요.
+              </p>
+              <div class="mt-3 flex flex-wrap gap-2">
+                <span class="px-2 py-1 bg-neutral-100 rounded text-xs text-neutral-500">🏛️ 구마 겐고 설계</span>
+                <span class="px-2 py-1 bg-neutral-100 rounded text-xs text-neutral-500">☕ 리저브 커피</span>
+                <span class="px-2 py-1 bg-neutral-100 rounded text-xs text-neutral-500">👶 유모차 입장 O</span>
+              </div>
+            </div>
+
+            <div class="timeline-dot relative">
+              <div class="flex items-center gap-3 mb-2">
+                <span class="text-xs font-medium text-orange-600 bg-orange-50 px-2 py-0.5 rounded">오후</span>
+                <span class="text-sm text-neutral-400">12:30</span>
+              </div>
+              <h4 class="font-semibold text-lg mb-2">다자이후 점심 & 쇼핑 🍜</h4>
+              <p class="text-sm text-neutral-500 leading-relaxed">
+                참배로의 명물 우멘(가는 우동) 가게에서 점심! 아기도 먹을 수 있게 국물을 식혀서 주면 좋습니다. 다자이후의 기념품 가게들은 귀여운 소품이 많아 구경하는 재미가 있어요.
+              </p>
+            </div>
+
+            <div class="timeline-dot relative">
+              <div class="flex items-center gap-3 mb-2">
+                <span class="text-xs font-medium text-purple-600 bg-purple-50 px-2 py-0.5 rounded">오후</span>
+                <span class="text-sm text-neutral-400">15:00</span>
+              </div>
+              <h4 class="font-semibold text-lg mb-2">후쿠오카공항 → 귀국 ✈️</h4>
+              <p class="text-sm text-neutral-500 leading-relaxed">
+                다자이후에서 니시테쓰 후쿠오카역까지 전차로 약 40분 → 공항까지 지하철로 연결. 공항 면세점에서 마지막 쇼핑! 아기가 피곤해할 수 있으니 여유 있게 공항에 도착하세요. 출국 심사 대기 시 아기 간식 필수!
+              </p>
+              <div class="mt-3 flex flex-wrap gap-2">
+                <span class="px-2 py-1 bg-neutral-100 rounded text-xs text-neutral-500">⏰ 공항 2시간 전 도착</span>
+                <span class="px-2 py-1 bg-neutral-100 rounded text-xs text-neutral-500">🍼 대기 시 간식</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="lg:col-span-5 space-y-6">
+          <div class="rounded-2xl overflow-hidden shadow-sm">
+            <img src="https://picsum.photos/seed/dazaifu-shrine/600/400.jpg" alt="다자이후 텐만구" class="w-full h-56 object-cover">
+            <div class="p-4 bg-neutral-50">
+              <p class="text-sm font-medium">다자이후 텐만구</p>
+              <p class="text-xs text-neutral-400">아기랑 잉어 먹이주기 체험</p>
+            </div>
+          </div>
+          <div class="rounded-2xl overflow-hidden shadow-sm">
+            <img src="https://picsum.photos/seed/starbucks-dazaifu/600/400.jpg" alt="규탕 스타벅스" class="w-full h-56 object-cover">
+            <div class="p-4 bg-neutral-50">
+              <p class="text-sm font-medium">규탕 (스타벅스 다자이후)</p>
+              <p class="text-xs text-neutral-400">구마 겐고 설계의 아름다운 공간</p>
+            </div>
+          </div>
+          <div class="bg-orange-50 rounded-2xl p-6 border border-orange-100">
+            <div class="flex items-center gap-2 mb-3">
+              <iconify-icon icon="mdi:lightbulb-outline" class="text-lg text-orange-500"></iconify-icon>
+              <span class="text-sm font-semibold text-orange-800">DAY 3 꿀팁</span>
+            </div>
+            <p class="text-sm text-orange-700 leading-relaxed">
+              귀국일은 짐 정리와 이동 시간을 고려해 일정을 짧게 잡으세요. 다자이후 하나만 확실히 둘러보고 여유 있게 공항으로 향하는 게 아기 스트레스를 줄이는 비결입니다.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tips Section -->
+  <section id="tips" class="py-20 px-6 bg-neutral-900 text-white">
+    <div class="max-w-[1200px] mx-auto">
+      <div class="text-center mb-14">
+        <div class="inline-flex items-center gap-2 px-3 py-1.5 bg-white/10 rounded-full text-blue-400 text-xs font-medium mb-4">
+          <iconify-icon icon="mdi:heart-outline"></iconify-icon>
+          BABY TIPS
+        </div>
+        <h2 class="text-3xl lg:text-4xl font-medium tracking-tight">아기 동반 여행 실전 팁</h2>
+        <p class="text-neutral-400 mt-3">30개월 아기랑 후쿠오카 다녀오신 선배 맘팁들의 경험담</p>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Tip 1 -->
+        <div class="bg-white/5 rounded-2xl p-6 border border-white/10 hover:bg-white/10 transition-colors duration-300">
+          <div class="w-12 h-12 bg-blue-500/20 rounded-xl flex items-center justify-center mb-4">
+            <iconify-icon icon="mdi:baby-carriage" class="text-2xl text-blue-400"></iconify-icon>
+          </div>
+          <h3 class="font-semibold text-lg mb-2">유모차 vs 아기띠</h3>
+          <p class="text-sm text-neutral-400 leading-relaxed">둘 다 가져가세요! 평지는 유모차, 신사 계단이나 혼잡한 곳은 아기띠로. 일본은 엘리베이터가 있어 유모차 이동이 한국보다 수월한 편입니다.</p>
+        </div>
+
+        <!-- Tip 2 -->
+        <div class="bg-white/5 rounded-2xl p-6 border border-white/10 hover:bg-white/10 transition-colors duration-300">
+          <div class="w-12 h-12 bg-pink-500/20 rounded-xl flex items-center justify-center mb-4">
+            <iconify-icon icon="mdi:food-apple-outline" class="text-2xl text-pink-400"></iconify-icon>
+          </div>
+          <h3 class="font-semibold text-lg mb-2">아기 간식은 한국 것!</h3>
+          <p class="text-sm text-neutral-400 leading-relaxed">일본 과자는 달고 자극적인 것이 많아 30개월 아기에게 부적합할 수 있습니다. 한국에서 먹던 간식을 넉넉히 챙기세요. 편의점 바나나, 주스는 현지 구매 가능합니다.</p>
+        </div>
+
+        <!-- Tip 3 -->
+        <div class="bg-white/5 rounded-2xl p-6 border border-white/10 hover:bg-white/10 transition-colors duration-300">
+          <div class="w-12 h-12 bg-emerald-500/20 rounded-xl flex items-center justify-center mb-4">
+            <iconify-icon icon="mdi:bed-clock" class="text-2xl text-emerald-400"></iconify-icon>
+          </div>
+          <h3 class="font-semibold text-lg mb-2">낮잠 스케줄 지키기</h3>
+          <p class="text-sm text-neutral-400 leading-relaxed">아기 낮잠 시간을 최우선으로 일정을 짜세요. 낮잠 시간에는 카페에서 쉬거나 실내 시설을 이용하세요. 강제로 깨우면 오후 내내 힘들어집니다.</p>
+        </div>
+
+        <!-- Tip 4 -->
+        <div class="bg-white/5 rounded-2xl p-6 border border-white/10 hover:bg-white/10 transition-colors duration-300">
+          <div class="w-12 h-12 bg-orange-500/20 rounded-xl flex items-center justify-center mb-4">
+            <iconify-icon icon="mdi:hospital-box-outline" class="text-2xl text-orange-400"></iconify-icon>
+          </div>
+          <h3 class="font-semibold text-lg mb-2">의약품 챙기기</h3>
+          <p class="text-sm text-neutral-400 leading-relaxed">해열진통제(부루펜/타이레놀), 베이비 연고, 체온계, 파스, 멀미약 등은 꼭 챙기세요. 일본 약국에서 아기 약 사는 건 언어 문제로 어려울 수 있습니다.</p>
+        </div>
+
+        <!-- Tip 5 -->
+        <div class="bg-white/5 rounded-2xl p-6 border border-white/10 hover:bg-white/10 transition-colors duration-300">
+          <div class="w-12 h-12 bg-purple-500/20 rounded-xl flex items-center justify-center mb-4">
+            <iconify-icon icon="mdi:water-outline" class="text-2xl text-purple-400"></iconify-icon>
+          </div>
+          <h3 class="font-semibold text-lg mb-2">수분 보충 수시로</h3>
+          <p class="text-sm text-neutral-400 leading-relaxed">일본은 건물 내 흡연 구역이 있어 건조할 수 있고, 야외는 습도가 높아 땀을 많이 흘립니다. 아기 물병을 항상 챙기고 수시로 물을 먹여주세요.</p>
+        </div>
+
+        <!-- Tip 6 -->
+        <div class="bg-white/5 rounded-2xl p-6 border border-white/10 hover:bg-white/10 transition-colors duration-300">
+          <div class="w-12 h-12 bg-yellow-500/20 rounded-xl flex items-center justify-center mb-4">
+            <iconify-icon icon="mdi:home-city-outline" class="text-2xl text-yellow-400"></iconify-icon>
+          </div>
+          <h3 class="font-semibold text-lg mb-2">숙소 선택 기준</h3>
+          <p class="text-sm text-neutral-400 leading-relaxed">덴진/하카타 역 근처가 최고! 유모차로 이동 가능한 거리, 세탁기 있는 숙소, 넓은 객실이 핵심입니다. 비즈니스호텔보다 레지던스형이 아기와 더 편해요.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Restaurants Section -->
+  <section id="restaurants" class="py-20 px-6 bg-neutral-50">
+    <div class="max-w-[1200px] mx-auto">
+      <div class="text-center mb-12">
+        <div class="inline-flex items-center gap-2 px-3 py-1.5 bg-red-50 rounded-full text-red-600 text-xs font-medium mb-4">
+          <iconify-icon icon="mdi:silverware-fork-knife"></iconify-icon>
+          RESTAURANTS
+        </div>
+        <h2 class="text-3xl lg:text-4xl font-medium tracking-tight">아기와 가도 괜찮은 식당</h2>
+        <p class="text-neutral-400 mt-3">유모차 입장 가능, 아기 메뉴 대응, 혼잡도 낮은 곳 위주로</p>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-6">
+        <!-- 식당 1 -->
+        <div class="bg-white rounded-2xl overflow-hidden border border-neutral-200/50 shadow-sm hover:shadow-lg transition-shadow duration-500">
+          <div class="grid grid-cols-5">
+            <div class="col-span-2">
+              <img src="https://picsum.photos/seed/ichiran-ramen/300/300.jpg" alt="이치란" class="w-full h-full object-cover">
+            </div>
+            <div class="col-span-3 p-5">
+              <div class="flex items-center gap-2 mb-2">
+                <span class="px-2 py-0.5 bg-blue-50 text-blue-600 text-xs font-medium rounded">라멘</span>
+                <span class="text-xs text-neutral-400">하카타</span>
+              </div>
+              <h3 class="font-semibold text-lg">이치란 본점</h3>
+              <p class="text-sm text-neutral-500 mt-2 leading-relaxed">아기와는 칸막이 석이 불편할 수 있어 테이블석이 있는 지점을 추천! 유아용 의자는 없지만, 옆자리에 앉혀 먹일 수 있습니다. 국물 온도 조절 요청 가능.</p>
+              <div class="flex items-center gap-3 mt-3 text-xs text-neutral-400">
+                <span class="flex items-center gap-1"><iconify-icon icon="mdi:map-marker"></iconify-icon>하카타역 도보 5분</span>
+                <span class="flex items-center gap-1"><iconify-icon icon="mdi:currency-jpy"></iconify-icon>~900엔</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 식당 2 -->
+        <div class="bg-white rounded-2xl overflow-hidden border border-neutral-200/50 shadow-sm hover:shadow-lg transition-shadow duration-500">
+          <div class="grid grid-cols-5">
+            <div class="col-span-2">
+              <img src="https://picsum.photos/seed/gyukaku-yakiniku/300/300.jpg" alt="규카쿠" class="w-full h-full object-cover">
+            </div>
+            <div class="col-span-3 p-5">
+              <div class="flex items-center gap-2 mb-2">
+                <span class="px-2 py-0.5 bg-red-50 text-red-600 text-xs font-medium rounded">야키니쿠</span>
+                <span class="text-xs text-neutral-400">덴진</span>
+              </div>
+              <h3 class="font-semibold text-lg">규카쿠 덴진점</h3>
+              <p class="text-sm text-neutral-500 mt-2 leading-relaxed">가족 단위 테이블, 아기 의자 대여 가능! 고기를 작게 잘라주면 아기도 맛있게 먹어요. 연기를 피할 수 있는 자리 요청하세요. 런치 세트가 가성비 좋습니다.</p>
+              <div class="flex items-center gap-3 mt-3 text-xs text-neutral-400">
+                <span class="flex items-center gap-1"><iconify-icon icon="mdi:map-marker"></iconify-icon>덴진 도보 3분</span>
+                <span class="flex items-center gap-1"><iconify-icon icon="mdi:currency-jpy"></iconify-icon>런치 ~1,500엔</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 식당 3 -->
+        <div class="bg-white rounded-2xl overflow-hidden border border-neutral-200/50 shadow-sm hover:shadow-lg transition-shadow duration-500">
+          <div class="grid grid-cols-5">
+            <div class="col-span-2">
+              <img src="https://picsum.photos/seed/udon-restaurant/300/300.jpg" alt="우동 가게" class="w-full h-full object-cover">
+            </div>
+            <div class="col-span-3 p-5">
+              <div class="flex items-center gap-2 mb-2">
+                <span class="px-2 py-0.5 bg-amber-50 text-amber-600 text-xs font-medium rounded">우동</span>
+                <span class="text-xs text-neutral-400">다자이후</span>
+              </div>
+              <h3 class="font-semibold text-lg">우메다 우동 (매실 우동)</h3>
+              <p class="text-sm text-neutral-500 mt-2 leading-relaxed">다자이후 참배로 명물! 따뜻한 우동 국물을 식혀 아기에게 주면 OK. 매실맛이 있어 아기가 거부할 수 있으니 소금 우동을 따로 주문하는 게 좋습니다.</p>
+              <div class="flex items-center gap-3 mt-3 text-xs text-neutral-400">
+                <span class="flex items-center gap-1"><iconify-icon icon="mdi:map-marker"></iconify-icon>다자이후 참배로</span>
+                <span class="flex items-center gap-1"><iconify-icon icon="mdi:currency-jpy"></iconify-icon>~800엔</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 식당 4 -->
+        <div class="bg-white rounded-2xl overflow-hidden border border-neutral-200/50 shadow-sm hover:shadow-lg transition-shadow duration-500">
+          <div class="grid grid-cols-5">
+            <div class="col-span-2">
+              <img src="https://picsum.photos/seed/korean-restaurant-fukuoka/300/300.jpg" alt="한식당" class="w-full h-full object-cover">
+            </div>
+            <div class="col-span-3 p-5">
+              <div class="flex items-center gap-2 mb-2">
+                <span class="px-2 py-0.5 bg-green-50 text-green-600 text-xs font-medium rounded">한식</span>
+                <span class="text-xs text-neutral-400">덴진</span>
+              </div>
+              <h3 class="font-semibold text-lg">이모네 한식당</h3>
+              <p class="text-sm text-neutral-500 mt-2 leading-relaxed">아기가 일본 음식을 거부할 때의 비상용! 덴진에 한국 식당이 꽤 있습니다. 밥과 국이 있어 아기가 편하게 먹을 수 있어요. 김치찌개, 된장찌개 등 메뉴 구성이 좋습니다.</p>
+              <div class="flex items-center gap-3 mt-3 text-xs text-neutral-400">
+                <span class="flex items-center gap-1"><iconify-icon icon="mdi:map-marker"></iconify-icon>덴진 중심가</span>
+                <span class="flex items-center gap-1"><iconify-icon icon="mdi:currency-jpy"></iconify-icon>~1,200엔</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Budget Section -->
+  <section class="py-20 px-6 bg-white">
+    <div class="max-w-[1200px] mx-auto">
+      <div class="text-center mb-12">
+        <div class="inline-flex items-center gap-2 px-3 py-1.5 bg-emerald-50 rounded-full text-emerald-600 text-xs font-medium mb-4">
+          <iconify-icon icon="mdi:cash-multiple"></iconify-icon>
+          BUDGET
+        </div>
+        <h2 class="text-3xl lg:text-4xl font-medium tracking-tight">예산 가이드</h2>
+        <p class="text-neutral-400 mt-3">2성인 1유아 기준, 2박 3일 예상 비용</p>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="bg-neutral-50 rounded-2xl p-6 text-center border border-neutral-200/50">
+          <iconify-icon icon="mdi:airplane" class="text-3xl text-blue-600 mb-3"></iconify-icon>
+          <div class="text-2xl font-semibold">28~45만원</div>
+          <div class="text-sm text-neutral-400 mt-1">항공 (성인 2 + 유아 1)</div>
+          <div class="text-xs text-neutral-300 mt-2">LCC 특가 활용하면 더 저렴</div>
+        </div>
+        <div class="bg-neutral-50 rounded-2xl p-6 text-center border border-neutral-200/50">
+          <iconify-icon icon="mdi:bed" class="text-3xl text-emerald-600 mb-3"></iconify-icon>
+          <div class="text-2xl font-semibold">15~30만원</div>
+          <div class="text-sm text-neutral-400 mt-1">숙박 2박</div>
+          <div class="text-xs text-neutral-300 mt-2">덴진/하카타 비즈니스호텔 기준</div>
+        </div>
+        <div class="bg-neutral-50 rounded-2xl p-6 text-center border border-neutral-200/50">
+          <iconify-icon icon="mdi:food" class="text-3xl text-orange-500 mb-3"></iconify-icon>
+          <div class="text-2xl font-semibold">10~15만원</div>
+          <div class="text-sm text-neutral-400 mt-1">식비 3일</div>
+          <div class="text-xs text-neutral-300 mt-2">아기 분식 포함, 점심 위주</div>
+        </div>
+        <div class="bg-neutral-50 rounded-2xl p-6 text-center border border-neutral-200/50">
+          <iconify-icon icon="mdi:train-car" class="text-3xl text-purple-600 mb-3"></iconify-icon>
+          <div class="text-2xl font-semibold">3~5만원</div>
+          <div class="text-sm text-neutral-400 mt-1">교통 & 입장료</div>
+          <div class="text-xs text-neutral-300 mt-2">지하철+마린월드+다자이후</div>
+        </div>
+      </div>
+
+      <div class="mt-8 bg-gradient-to-r from-blue-50 to-emerald-50 rounded-2xl p-8 text-center border border-blue-100">
+        <p class="text-lg font-semibold text-neutral-800">총 예상 비용</p>
+        <p class="text-4xl font-bold text-blue-600 mt-2">약 56~95만원</p>
+        <p class="text-sm text-neutral-400 mt-2">성인 2명 + 유아 1명 기준 | 항공 특가 & 숙소 할인에 따라 변동</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ / Common Concerns -->
+  <section class="py-20 px-6 bg-neutral-50">
+    <div class="max-w-[800px] mx-auto">
+      <div class="text-center mb-12">
+        <div class="inline-flex items-center gap-2 px-3 py-1.5 bg-purple-50 rounded-full text-purple-600 text-xs font-medium mb-4">
+          <iconify-icon icon="mdi:help-circle-outline"></iconify-icon>
+          FAQ
+        </div>
+        <h2 class="text-3xl lg:text-4xl font-medium tracking-tight">자주 묻는 질문</h2>
+      </div>
+
+      <div class="space-y-4" id="faqContainer">
+        <div class="faq-item bg-white rounded-xl border border-neutral-200/50 overflow-hidden">
+          <button class="faq-btn w-full px-6 py-5 text-left flex items-center justify-between" onclick="toggleFaq(this)">
+            <span class="font-medium">기저귀는 현지에서 살 수 있나요?</span>
+            <iconify-icon icon="mdi:chevron-down" class="text-xl text-neutral-400 transition-transform duration-300 faq-icon"></iconify-icon>
+          </button>
+          <div class="faq-content hidden px-6 pb-5">
+            <p class="text-sm text-neutral-500 leading-relaxed">네, 편의점과 드럭스토어(마츠모토 키요시 등)에서 기저귀를 살 수 있습니다. 다만 일본 기저귀는 사이즈가 한국과 다를 수 있고, 아기 피부에 안 맞을 수 있어 1~2일치는 한국에서 가져가고 나머지는 현지 구매하는 걸 추천합니다. 물티슈는 편의점에 넉넉히 있습니다.</p>
+          </div>
+        </div>
+
+        <div class="faq-item bg-white rounded-xl border border-neutral-200/50 overflow-hidden">
+          <button class="faq-btn w-full px-6 py-5 text-left flex items-center justify-between" onclick="toggleFaq(this)">
+            <span class="font-medium">유모차 그대로 비행기에 탈 수 있나요?</span>
+            <iconify-icon icon="mdi:chevron-down" class="text-xl text-neutral-400 transition-transform duration-300 faq-icon"></iconify-icon>
+          </button>
+          <div class="faq-content hidden px-6 pb-5">
+            <p class="text-sm text-neutral-500 leading-relaxed">접이식 유모차는 탑승구(Gate)에서 맡길 수 있습니다! 탑승 전까지 유모차를 쓰고, 비행기 탈 때 맡기면 도착지에서 바로 찾을 수 있어요. 항공사마다 규정이 다르니 사전에 확인하세요. 캐리어형 아기띠는 기내 반입 가능합니다.</p>
+          </div>
+        </div>
+
+        <div class="faq-item bg-white rounded-xl border border-neutral-200/50 overflow-hidden">
+          <button class="faq-btn w-full px-6 py-5 text-left flex items-center justify-between" onclick="toggleFaq(this)">
+            <span class="font-medium">일본 편의점에서 아기가 먹을 만한 게 있나요?</span>
+            <iconify-icon icon="mdi:chevron-down" class="text-xl text-neutral-400 transition-transform duration-300 faq-icon"></iconify-icon>
+          </button>
+          <div class="faq-content hidden px-6 pb-5">
+            <p class="text-sm text-neutral-500 leading-relaxed">세븐일레븐, 패밀리마트 등에 아기 식품 코너가 있습니다! 과일 푸딩, 바나나, 유산균 음료, 주스, 연한 빵 등을 구할 수 있어요. 오뎅의 무도 아기가 먹기 좋습니다. 다만 간이 센 반찬이나 매운 것은 피하세요.</p>
+          </div>
+        </div>
+
+        <div class="faq-item bg-white rounded-xl border border-neutral-200/50 overflow-hidden">
+          <button class="faq-btn w-full px-6 py-5 text-left flex items-center justify-between" onclick="toggleFaq(this)">
+            <span class="font-medium">아기가 비행 중 울면 어떡하죠?</span>
+            <iconify-icon icon="mdi:chevron-down" class="text-xl text-neutral-400 transition-transform duration-300 faq-icon"></iconify-icon>
+          </button>
+          <div class="faq-content hidden px-6 pb-5">
+            <p class="text-sm text-neutral-500 leading-relaxed">이착륙 시 귀 통증 때문에 우는 게 가장 흔합니다. 젖병이나 간식으로 삼키는 동작을 유도하세요. 기내에서 걸어다니며 달래는 것도 가능합니다. 좋아하는 장난감, 스티커북 등을 미리 준비하고, 이어플러그도 챙기세요. 대부분의 승객이 이해해줍니다!</p>
+          </div>
+        </div>
+
+        <div class="faq-item bg-white rounded-xl border border-neutral-200/50 overflow-hidden">
+          <button class="faq-btn w-full px-6 py-5 text-left flex items-center justify-between" onclick="toggleFaq(this)">
+            <span class="font-medium">후쿠오카의 수유실/기저귀실은 잘 되어 있나요?</span>
+            <iconify-icon icon="mdi:chevron-down" class="text-xl text-neutral-400 transition-transform duration-300 faq-icon"></iconify-icon>
+          </button>
+          <div class="faq-content hidden px-6 pb-5">
+            <p class="text-sm text-neutral-500 leading-relaxed">일본은 아기 시설이 아주 잘 되어 있습니다! 대형 쇼핑몰(캐널시티, AMU플라자 등), 역 건물, 공항 어디나 수유실과 기저귀 교환대가 있습니다. 편의점은 없는 곳도 있으니 쇼핑몰을 적극 활용하세요. 공중화장실에도 기저귀대가 있는 경우가 많습니다.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Summary / CTA -->
+  <section class="py-20 px-6 bg-gradient-to-br from-blue-600 via-blue-700 to-indigo-800 text-white relative overflow-hidden">
+    <div class="absolute inset-0 -z-10">
+      <div class="absolute top-0 right-0 w-96 h-96 bg-white/5 rounded-full blur-3xl"></div>
+      <div class="absolute bottom-0 left-0 w-72 h-72 bg-emerald-500/10 rounded-full blur-3xl"></div>
+    </div>
+    <div class="max-w-[800px] mx-auto text-center">
+      <iconify-icon icon="mdi:airplane-takeoff" class="text-5xl mb-6 opacity-80"></iconify-icon>
+      <h2 class="text-3xl lg:text-5xl font-medium tracking-tight mb-6">아기와의 첫 여행,<br>후쿠오카로 시작하세요!</h2>
+      <p class="text-blue-100 text-lg leading-relaxed max-w-lg mx-auto mb-8">
+        가깝고, 아기 친화적이고, 맛있는 곳. 30개월 아기랑 후쿠오카 여행은 생각보다 훨씬 수월합니다. 준비만 잘하면 잊지 못할 추억이 될 거예요 ✈️👶
+      </p>
+      <div class="flex flex-wrap justify-center gap-4">
+        <button onclick="saveChecklist()" class="inline-flex items-center gap-2 px-8 py-4 bg-white text-blue-700 rounded-xl text-sm font-semibold hover:scale-[0.975] transition-transform duration-400">
+          <iconify-icon icon="mdi:download" class="text-lg"></iconify-icon>
+          체크리스트 저장하기
+        </button>
+        <a href="#preparation" class="inline-flex items-center gap-2 px-8 py-4 bg-white/10 border border-white/20 text-white rounded-xl text-sm font-medium hover:bg-white/20 transition-colors">
+          <iconify-icon icon="mdi:clipboard-check-outline" class="text-lg"></iconify-icon>
+          준비물 다시 확인
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="py-12 px-6 bg-neutral-900 text-neutral-400 border-t border-neutral-800">
+    <div class="max-w-[1200px] mx-auto">
+      <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+        <div class="flex items-center gap-2">
+          <iconify-icon icon="mdi:airplane-takeoff" class="text-xl text-blue-400"></iconify-icon>
+          <span class="text-white font-semibold">아기랑 후쿠오카</span>
+        </div>
+        <p class="text-sm text-neutral-500">30개월 아기와 함께하는 후쿠오카 2박3일 여행 가이드 · 2024</p>
+        <div class="flex items-center gap-4 text-sm">
+          <span>정보는 변경될 수 있습니다</span>
+          <span class="text-neutral-600">|</span>
+          <span>방문 전 꼭 재확인하세요</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Toast Container -->
+  <div id="toastContainer" class="fixed bottom-6 right-6 z-50 space-y-2"></div>
+
+  <script>
+    // Mobile menu toggle
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    mobileMenuBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+
+    // Close mobile menu on link click
+    mobileMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.add('hidden');
+      });
+    });
+
+    // FAQ toggle
+    function toggleFaq(btn) {
+      const content = btn.nextElementSibling;
+      const icon = btn.querySelector('.faq-icon');
+      const isHidden = content.classList.contains('hidden');
+      
+      // Close all others
+      document.querySelectorAll('.faq-content').forEach(c => c.classList.add('hidden'));
+      document.querySelectorAll('.faq-icon').forEach(i => i.style.transform = 'rotate(0deg)');
+      
+      if (isHidden) {
+        content.classList.remove('hidden');
+        icon.style.transform = 'rotate(180deg)';
+      }
+    }
+
+    // Toast notification
+    function showToast(message, icon = 'mdi:check-circle') {
+      const container = document.getElementById('toastContainer');
+      const toast = document.createElement('div');
+      toast.className = 'toast flex items-center gap-3 bg-neutral-900 text-white px-5 py-3 rounded-xl shadow-lg text-sm';
+      toast.innerHTML = `<iconify-icon icon="${icon}" class="text-lg text-emerald-400"></iconify-icon><span>${message}</span>`;
+      container.appendChild(toast);
+      setTimeout(() => toast.remove(), 2500);
+    }
+
+    // Save checklist
+    function saveChecklist() {
+      const checkboxes = document.querySelectorAll('.checklist-item input[type="checkbox"]');
+      let checked = 0;
+      let total = checkboxes.length;
+      checkboxes.forEach(cb => { if (cb.checked) checked++; });
+      
+      if (checked === total) {
+        showToast('모든 준비물이 완료되었습니다! 🎉', 'mdi:party-popper');
+      } else {
+        showToast(`준비 현황: ${checked}/${total} 완료`, 'mdi:clipboard-check');
+      }
+    }
+
+    // Checklist persistence
+    document.querySelectorAll('.checklist-item input[type="checkbox"]').forEach(cb => {
+      cb.addEventListener('change', () => {
+        if (cb.checked) {
+          showToast('준비 완료! ✓', 'mdi:check');
+        }
+      });
+    });
+
+    // Smooth scroll for nav links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+
+    // Navbar background on scroll
+    const nav = document.querySelector('nav');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 20) {
+        nav.classList.add('shadow-sm');
+      } else {
+        nav.classList.remove('shadow-sm');
+      }
+    });
+  </script>
+</body>
+</html>
