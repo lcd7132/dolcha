@@ -1,213 +1,705 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>후쿠오카 여행 일본어</title>
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      background: #fff;
-      color: #222;
-      font-family: -apple-system, 'Noto Sans KR', sans-serif;
-      font-size: 15px;
-      line-height: 1.6;
-      padding: 20px;
-      max-width: 800px;
-      margin: 0 auto;
-    }
-    h1 { font-size: 22px; font-weight: 700; margin-bottom: 4px; }
-    .sub { color: #888; font-size: 13px; margin-bottom: 30px; }
-    h2 {
-      font-size: 16px;
-      font-weight: 700;
-      padding: 12px 0 6px;
-      border-bottom: 2px solid #222;
-      margin-top: 30px;
-      margin-bottom: 10px;
-    }
-    .item {
-      padding: 10px 0;
-      border-bottom: 1px solid #eee;
-    }
-    .jp { font-size: 17px; font-weight: 600; margin-bottom: 2px; }
-    .kr { color: #333; font-weight: 500; }
-    .pron { color: #7c3aed; font-size: 13px; margin-bottom: 1px; }
-    .ctx { color: #999; font-size: 12px; }
-    .tabs {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      margin-bottom: 20px;
-    }
-    .tab {
-      padding: 5px 12px;
-      border: 1px solid #ddd;
-      border-radius: 20px;
-      font-size: 12px;
-      cursor: pointer;
-      background: #fff;
-      color: #666;
-    }
-    .tab.on { background: #222; color: #fff; border-color: #222; }
-    .search {
-      width: 100%;
-      padding: 8px 14px;
-      border: 1px solid #ddd;
-      border-radius: 8px;
-      font-size: 14px;
-      margin-bottom: 16px;
-      outline: none;
-      font-family: inherit;
-    }
-    .search:focus { border-color: #222; }
-    .tip {
-      background: #f8f8f8;
-      padding: 12px 14px;
-      border-radius: 8px;
-      margin-top: 30px;
-      font-size: 13px;
-      color: #555;
-    }
-    .tip b { color: #222; }
-    .no-result { color: #aaa; text-align: center; padding: 40px 0; font-size: 14px; }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>후쿠오카 여행 실전 일본어 가이드</title>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Zen+Maru+Gothic:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+  :root {
+    --bg: #0c1220;
+    --bg2: #111a2e;
+    --card: #162036;
+    --card-hover: #1c2a45;
+    --border: #243050;
+    --accent: #e8505b;
+    --accent2: #ff7a85;
+    --gold: #f0c040;
+    --jp: #7ec8e3;
+    --pron: #c9a0dc;
+    --kr: #e0e0e0;
+    --muted: #6b7fa3;
+    --tag-bg: rgba(232,80,91,0.15);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Noto Sans KR', sans-serif;
+    background: var(--bg);
+    color: var(--kr);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+  .jp-font { font-family: 'Zen Maru Gothic', 'Noto Sans KR', sans-serif; }
+
+  .bg-blobs { position: fixed; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:0; overflow:hidden; }
+  .bg-blobs .blob { position:absolute; border-radius:50%; filter:blur(120px); opacity:0.12; }
+  .blob-1 { width:600px; height:600px; background:var(--accent); top:-200px; right:-100px; animation:blobFloat 20s ease-in-out infinite; }
+  .blob-2 { width:500px; height:500px; background:var(--jp); bottom:-150px; left:-100px; animation:blobFloat 25s ease-in-out infinite reverse; }
+  .blob-3 { width:400px; height:400px; background:var(--gold); top:50%; left:50%; transform:translate(-50%,-50%); animation:blobFloat 18s ease-in-out infinite; }
+  @keyframes blobFloat {
+    0%,100% { transform:translate(0,0) scale(1); }
+    33% { transform:translate(30px,-30px) scale(1.05); }
+    66% { transform:translate(-20px,20px) scale(0.95); }
+  }
+
+  .sakura-container { position:fixed; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:1; overflow:hidden; }
+  .sakura {
+    position:absolute; top:-30px;
+    width:12px; height:12px;
+    background:radial-gradient(ellipse at center, rgba(232,80,91,0.6) 0%, rgba(255,122,133,0.2) 100%);
+    border-radius:50% 0 50% 0;
+    animation:sakuraFall linear infinite;
+    opacity:0;
+  }
+  @keyframes sakuraFall {
+    0% { opacity:0; transform:translateX(0) rotate(0deg); }
+    10% { opacity:0.7; }
+    90% { opacity:0.5; }
+    100% { opacity:0; transform:translateX(200px) rotate(720deg); top:110vh; }
+  }
+
+  .content-wrap { position:relative; z-index:2; }
+
+  .hero { position:relative; padding:80px 20px 60px; text-align:center; overflow:hidden; }
+  .hero::before { content:''; position:absolute; top:0; left:0; right:0; bottom:0; background:linear-gradient(180deg, rgba(232,80,91,0.06) 0%, transparent 100%); pointer-events:none; }
+  .hero-title {
+    font-size:clamp(2rem,5vw,3.5rem); font-weight:900; line-height:1.2; margin-bottom:12px;
+    background:linear-gradient(135deg, #fff 0%, var(--accent2) 50%, var(--gold) 100%);
+    -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+  }
+  .hero-sub { font-size:clamp(0.95rem,2vw,1.15rem); color:var(--muted); font-weight:300; letter-spacing:0.5px; }
+  .hero-badge {
+    display:inline-flex; align-items:center; gap:8px;
+    background:var(--tag-bg); border:1px solid rgba(232,80,91,0.3);
+    border-radius:100px; padding:8px 20px; margin-top:24px;
+    font-size:0.85rem; color:var(--accent2);
+  }
+
+  .search-wrap { max-width:560px; margin:0 auto 40px; position:relative; }
+  .search-wrap input {
+    width:100%; padding:16px 20px 16px 52px;
+    background:var(--card); border:1px solid var(--border);
+    border-radius:16px; color:var(--kr); font-size:1rem;
+    outline:none; transition:all 0.3s;
+    font-family:'Noto Sans KR', sans-serif;
+  }
+  .search-wrap input:focus { border-color:var(--accent); box-shadow:0 0 0 3px rgba(232,80,91,0.15); }
+  .search-wrap input::placeholder { color:var(--muted); }
+  .search-wrap .search-icon { position:absolute; left:18px; top:50%; transform:translateY(-50%); color:var(--muted); font-size:1.1rem; }
+  .search-count { text-align:center; color:var(--muted); font-size:0.85rem; margin-top:10px; min-height:20px; }
+
+  .cat-tabs { display:flex; flex-wrap:wrap; gap:8px; justify-content:center; padding:0 20px; margin-bottom:40px; max-width:900px; margin-left:auto; margin-right:auto; }
+  .cat-tab {
+    padding:10px 20px; border-radius:12px;
+    background:var(--card); border:1px solid var(--border);
+    color:var(--muted); cursor:pointer; font-size:0.9rem;
+    font-weight:500; transition:all 0.3s; user-select:none;
+    display:flex; align-items:center; gap:8px;
+  }
+  .cat-tab:hover { background:var(--card-hover); color:var(--kr); border-color:rgba(232,80,91,0.3); }
+  .cat-tab.active {
+    background:linear-gradient(135deg, var(--accent), var(--accent2));
+    color:#fff; border-color:transparent;
+    box-shadow:0 4px 20px rgba(232,80,91,0.3);
+  }
+  .cat-tab .tab-icon { font-size:1rem; }
+
+  .phrase-section { max-width:1100px; margin:0 auto; padding:0 20px 60px; display:none; }
+  .phrase-section.active { display:block; }
+
+  .section-header { display:flex; align-items:center; gap:16px; margin-bottom:28px; padding-bottom:16px; border-bottom:1px solid var(--border); }
+  .section-icon {
+    width:52px; height:52px; border-radius:16px;
+    display:flex; align-items:center; justify-content:center;
+    font-size:1.5rem; color:#fff;
+    background:linear-gradient(135deg, var(--accent), var(--accent2));
+    box-shadow:0 4px 16px rgba(232,80,91,0.25);
+  }
+  .section-title { font-size:1.5rem; font-weight:700; color:#fff; }
+  .section-count { font-size:0.85rem; color:var(--muted); margin-left:auto; }
+
+  .phrase-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(320px, 1fr)); gap:14px; }
+  .phrase-card {
+    background:var(--card); border:1px solid var(--border);
+    border-radius:14px; padding:18px 20px;
+    cursor:pointer; transition:all 0.3s; position:relative;
+    overflow:hidden;
+  }
+  .phrase-card::before { content:''; position:absolute; top:0; left:0; width:4px; height:100%; background:var(--accent); opacity:0; transition:opacity 0.3s; }
+  .phrase-card:hover {
+    background:var(--card-hover); border-color:rgba(232,80,91,0.3);
+    transform:translateY(-2px);
+    box-shadow:0 8px 30px rgba(0,0,0,0.3);
+  }
+  .phrase-card:hover::before { opacity:1; }
+  .phrase-card .card-num { position:absolute; top:10px; right:14px; font-size:0.7rem; color:var(--muted); opacity:0.5; }
+
+  .phrase-card .jp-text {
+    font-family:'Zen Maru Gothic','Noto Sans KR',sans-serif;
+    font-size:1.08rem; color:var(--jp); font-weight:700;
+    margin-bottom:3px; line-height:1.5;
+  }
+  .phrase-card .pron-text {
+    font-size:0.85rem; color:var(--pron); margin-bottom:8px;
+    font-weight:500; letter-spacing:0.3px;
+  }
+  .phrase-card .kr-text { font-size:0.92rem; color:var(--kr); line-height:1.5; opacity:0.85; }
+  .phrase-card .copy-btn {
+    position:absolute; bottom:12px; right:14px;
+    width:30px; height:30px; border-radius:8px;
+    background:transparent; border:1px solid var(--border);
+    color:var(--muted); cursor:pointer; font-size:0.75rem;
+    display:flex; align-items:center; justify-content:center;
+    transition:all 0.2s; opacity:0;
+  }
+  .phrase-card:hover .copy-btn { opacity:1; }
+  .phrase-card .copy-btn:hover { background:var(--accent); color:#fff; border-color:var(--accent); }
+
+  .toast {
+    position:fixed; bottom:30px; left:50%; transform:translateX(-50%) translateY(100px);
+    background:var(--card); border:1px solid var(--accent);
+    color:#fff; padding:14px 28px; border-radius:14px;
+    font-size:0.9rem; z-index:999; pointer-events:none;
+    transition:transform 0.4s cubic-bezier(0.16,1,0.3,1), opacity 0.4s;
+    opacity:0; box-shadow:0 8px 30px rgba(0,0,0,0.4);
+    display:flex; align-items:center; gap:10px;
+  }
+  .toast.show { transform:translateX(-50%) translateY(0); opacity:1; }
+
+  .scroll-top {
+    position:fixed; bottom:30px; right:30px; z-index:100;
+    width:48px; height:48px; border-radius:14px;
+    background:var(--accent); color:#fff; border:none;
+    cursor:pointer; font-size:1.1rem;
+    display:flex; align-items:center; justify-content:center;
+    opacity:0; transform:translateY(20px);
+    transition:all 0.3s; box-shadow:0 4px 20px rgba(232,80,91,0.4);
+  }
+  .scroll-top.visible { opacity:1; transform:translateY(0); }
+  .scroll-top:hover { transform:translateY(-3px); }
+
+  footer { text-align:center; padding:40px 20px; border-top:1px solid var(--border); color:var(--muted); font-size:0.85rem; }
+  footer .footer-tip { max-width:600px; margin:0 auto 16px; background:var(--card); border-radius:14px; padding:20px 24px; text-align:left; border:1px solid var(--border); }
+  footer .footer-tip strong { color:var(--accent2); }
+
+  .stats-bar { display:flex; justify-content:center; gap:40px; padding:20px; margin:0 auto 10px; max-width:700px; flex-wrap:wrap; }
+  .stat-item { text-align:center; }
+  .stat-num {
+    font-size:2rem; font-weight:900;
+    background:linear-gradient(135deg, var(--accent2), var(--gold));
+    -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+  }
+  .stat-label { font-size:0.8rem; color:var(--muted); margin-top:2px; }
+
+  .legend { display:flex; justify-content:center; gap:24px; margin-bottom:30px; flex-wrap:wrap; }
+  .legend-item { display:flex; align-items:center; gap:6px; font-size:0.82rem; color:var(--muted); }
+  .legend-dot { width:10px; height:10px; border-radius:3px; }
+
+  @media (max-width:640px) {
+    .phrase-grid { grid-template-columns:1fr; }
+    .cat-tab { padding:8px 14px; font-size:0.82rem; }
+    .hero { padding:60px 16px 40px; }
+    .stats-bar { gap:24px; }
+    .stat-num { font-size:1.5rem; }
+  }
+  .phrase-card { animation:cardIn 0.4s ease both; }
+  @keyframes cardIn { from { opacity:0; transform:translateY(16px); } to { opacity:1; transform:translateY(0); } }
+  .highlight { background:rgba(232,80,91,0.25); border-radius:3px; padding:0 2px; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .sakura, .blob { animation: none !important; }
+    .phrase-card { animation: none !important; }
+  }
+</style>
 </head>
 <body>
 
-<h1>후쿠오카 여행 일본어</h1>
-<p class="sub">클릭하면 발음을 들을 수 있습니다</p>
+<div class="bg-blobs">
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="blob blob-3"></div>
+</div>
+<div class="sakura-container" id="sakuraContainer"></div>
 
-<input class="search" placeholder="검색 (예: 감사합니다, 라멘...)" id="search" oninput="render()">
+<div class="content-wrap">
+  <header class="hero">
+    <div class="hero-title">후쿠오카 여행 실전 일본어</div>
+    <p class="hero-sub">상황별로 바로 쓸 수 있는 표현을 한눈에 정리했습니다</p>
+    <div class="hero-badge">
+      <i class="fas fa-map-marker-alt"></i>
+      FUKUOKA, JAPAN
+    </div>
+  </header>
 
-<div class="tabs" id="tabs"></div>
-<div id="list"></div>
+  <div class="stats-bar">
+    <div class="stat-item">
+      <div class="stat-num" id="statTotal">0</div>
+      <div class="stat-label">총 표현 수</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">10</div>
+      <div class="stat-label">상황 카테고리</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">200+</div>
+      <div class="stat-label">여행 필수 문장</div>
+    </div>
+  </div>
 
-<div class="tip">
-  <b>후쿠오카 여행 팁</b><br>
-  • 소규모 식당은 현금만 받는 곳이 많으니 현금 준비 필수<br>
-  • 거리에 쓰레기통이 거의 없음 → 편의점 봉투 챙기기<br>
-  • 지하철 하루 정액권 600엔 (경제적)<br>
-  • 텐진·카날시티는 걸어서 이동 가능한 거리<br>
-  • 에스컬레이터는 왼쪽에 서기, 전철 안에서 통화 금지
+  <div class="legend">
+    <div class="legend-item"><div class="legend-dot" style="background:var(--jp)"></div>일본어 원문</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--pron)"></div>한국어 발음</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--kr)"></div>한국어 뜻</div>
+  </div>
+
+  <div class="search-wrap">
+    <i class="fas fa-search search-icon"></i>
+    <input type="text" id="searchInput" placeholder="일본어, 발음 또는 한국어로 검색...">
+  </div>
+  <div class="search-count" id="searchCount"></div>
+
+  <nav class="cat-tabs" id="catTabs"></nav>
+  <main id="phraseSections"></main>
+
+  <footer>
+    <div class="footer-tip">
+      <strong><i class="fas fa-lightbulb"></i> 꿀팁:</strong> 카드를 클릭하면 일본어 문장이 클립보드에 복사됩니다. 현지에서 급할 때 상대방에게 보여주기만 해도 의사소통이 가능합니다!
+    </div>
+    <p>후쿠오카 여행 실전 일본어 가이드 &middot; 안전하고 즐거운 여행 되세요</p>
+  </footer>
 </div>
 
+<div class="toast" id="toast">
+  <i class="fas fa-check-circle" style="color:var(--accent)"></i>
+  <span id="toastMsg">복사되었습니다</span>
+</div>
+
+<button class="scroll-top" id="scrollTopBtn" aria-label="맨 위로">
+  <i class="fas fa-chevron-up"></i>
+</button>
+
 <script>
-const data = [
-  { cat:"인사", items:[
-    {jp:"こんにちは", kr:"안녕하세요", pron:"콘니치와", ctx:"기본 인사"},
-    {jp:"ありがとうございます", kr:"감사합니다", pron:"아리가토우 고자이마스", ctx:"정중한 감사"},
-    {jp:"すみません", kr:"실례합니다 / 죄송합니다", pron:"스미마셍", ctx:"주의 끌 때, 사과할 때 둘 다"},
-    {jp:"はい / いいえ", kr:"네 / 아니요", pron:"하이 / 이이에", ctx:"기본 응답"},
-    {jp:"はじめまして", kr:"처음 뵙겠습니다", pron:"하지메마시테", ctx:"처음 만났을 때"},
-    {jp:"よろしくお願いします", kr:"잘 부탁드립니다", pron:"요로시쿠 오네가이시마스", ctx:"만능 표현"},
-  ]},
-  { cat:"공항", items:[
-    {jp:"空港からハカタ駅までどうやって行きますか？", kr:"공항에서 하카타역까지 어떻게 가나요?", pron:"쿠코우카라 하카타에키마데 도오얏테 이키마스카?", ctx:"이동방법 묻기"},
-    {jp:"地下鉄はどこですか？", kr:"지하철은 어디인가요?", pron:"치카테츠와 도코데스카?", ctx:"지하철 위치"},
-    {jp:"タクシー乗り場はどこですか？", kr:"택시 승차장은 어디인가요?", pron:"타쿠시- 노리바와 도코데스카?", ctx:"택시 탈 때"},
-    {jp:"日本円に両替してください", kr:"엔화로 환전해 주세요", pron:"니혼엔니 료오가에시테쿠다사이", ctx:"환전"},
-    {jp:"パスポートをなくしました", kr:"여권을 잃어버렸습니다", pron:"파스포-토오 나쿠시마시타", ctx:"여권 분실"},
-  ]},
-  { cat:"교통", items:[
-    {jp:"天神までいくらですか？", kr:"텐진까지 얼마인가요?", pron:"텐징마데 이쿠라데스카?", ctx:"택시 요금"},
-    {jp:"ここで降ろしてください", kr:"여기서 내려주세요", pron:"코코데 오로시테쿠다사이", ctx:"택시에서 내릴 때"},
-    {jp:"一日乗車券はありますか？", kr:"1일 승차권이 있나요?", pron:"이치니치 죠-샤켄와 아리마스카?", ctx:"정액권"},
-    {jp:"次の駅はどこですか？", kr:"다음 역은 어디인가요?", pron:"츠기노 에키와 도코데스카?", ctx:"전철에서"},
-    {jp:"天神はどちらですか？", kr:"텐진은 어디쪽인가요?", pron:"텐징와 도치라데스카?", ctx:"방향 묻기"},
-    {jp:"このバスはCanal Cityに行きますか？", kr:"이 버스는 카날시티에 가나요?", pron:"코노 바스와 캐낼 시티니 이키마스카?", ctx:"버스 노선 확인"},
-  ]},
-  { cat:"숙소", items:[
-    {jp:"チェックインお願いします", kr:"체크인 부탁드립니다", pron:"체크인 오네가이시마스", ctx:"호텔 체크인"},
-    {jp:"チェックアウトお願いします", kr:"체크아웃 부탁드립니다", pron:"체크아웃 오네가이시마스", ctx:"호텔 체크아웃"},
-    {jp:"Wi-Fiのパスワードは何ですか？", kr:"와이파이 비밀번호가 뭔가요?", pron:"와이파이노 파스와-도와 난데스카?", ctx:"와이파이"},
-    {jp:"タオルをもらえますか？", kr:"수건 받을 수 있나요?", pron:"타오루오 모라에마스카?", ctx:"추가 수건"},
-    {jp:"荷物を預かっていただけますか？", kr:"짐 맡아주실 수 있나요?", pron:"니모츠오 아즈카테이타다케마스카?", ctx:"짐 보관"},
-    {jp:"静かな部屋をお願いします", kr:"조용한 방 부탁드립니다", pron:"시즈카나 헤야오 오네가이시마스", ctx:"방 배정 요청"},
-  ]},
-  { cat:"식당", items:[
-    {jp:"メニューを見せてください", kr:"메뉴 보여주세요", pron:"메뉴오 미세테쿠다사이", ctx:"메뉴 요청"},
-    {jp:"おすすめは何ですか？", kr:"추천 메뉴가 뭔가요?", pron:"오스스메와 난데스카?", ctx:"추천 묻기"},
-    {jp:"これをください", kr:"이것 주세요", pron:"코레오 쿠다사이", ctx:"메뉴 가리키며 주문"},
-    {jp:"豚骨ラーメンを一つください", kr:"돈코츠 라멘 하나 주세요", pron:"톤코츠 라-멘오 히토츠 쿠다사이", ctx:"후쿠오카 필수!"},
-    {jp:"もつ鍋を注文したいです", kr:"모츠나베 주문하고 싶습니다", pron:"모츠나베오 추-몬시타이데스", ctx:"후쿠오카 대표 요리"},
-    {jp:"水をください", kr:"물 주세요", pron:"미즈오 쿠다사이", ctx:"물 요청"},
-    {jp:"辛くしないでください", kr:"맵게 하지 말아주세요", pron:"카라쿠시나이데쿠다사이", ctx:"맵기 조절"},
-    {jp:"お会計お願いします", kr:"계산 부탁드립니다", pron:"오카이케이 오네가이시마스", ctx:"계산"},
-    {jp:"クレジットカードは使えますか？", kr:"신용카드 쓸 수 있나요?", pron:"쿠레짓토카-도와 츠카에마스카?", ctx:"카드 결제"},
-    {jp:"持ち帰りできますか？", kr:"포장할 수 있나요?", pron:"모치카에리 데키마스카?", ctx:"포장"},
-  ]},
-  { cat:"쇼핑", items:[
-    {jp:"いくらですか？", kr:"얼마인가요?", pron:"이쿠라데스카?", ctx:"가격 묻기"},
-    {jp:"これを見せてください", kr:"이것 보여주세요", pron:"코레오 미세테쿠다사이", ctx:"상품 보기"},
-    {jp:"試着してもいいですか？", kr:"입어봐도 되나요?", pron:"시참시테모 이-데스카?", ctx:"피팅룸"},
-    {jp:"サイズはありますか？", kr:"사이즈 있나요?", pron:"사이즈와 아리마스카?", ctx:"재고 확인"},
-    {jp:"免税できますか？", kr:"면세 되나요?", pron:"멘제이 데키마스카?", ctx:"면세 (5,000엔 이상, 여권 지참)"},
-    {jp:"袋をもらえますか？", kr:"봉투 받을 수 있나요?", pron:"후쿠로오 모라에마스카?", ctx:"쇼핑백"},
-  ]},
-  { cat:"관광", items:[
-    {jp:"写真を撮ってもいいですか？", kr:"사진 찍어도 되나요?", pron:"샤신오 톳테모 이-데스카?", ctx:"촬영 허가"},
-    {jp:"写真を撮ってください", kr:"사진 찍어주세요", pron:"샤신오 톳테쿠다사이", ctx:"부탁해서 찍기"},
-    {jp:"入場料はいくらですか？", kr:"입장료는 얼마인가요?", pron:"뉴-죠-료-와 이쿠라데스카?", ctx:"입장료"},
-    {jp:"トイレはどこですか？", kr:"화장실은 어디인가요?", pron:"토이레와 도코데스카?", ctx:"매우 자주 쓰임!"},
-    {jp:"営業時間は何時からですか？", kr:"영업시간은 몇 시부터인가요?", pron:"에이교-지칸와 난지카라데스카?", ctx:"영업시간"},
-  ]},
-  { cat:"긴급", items:[
-    {jp:"助けてください！", kr:"도와주세요!", pron:"타스케테쿠다사이!", ctx:"위급 상황"},
-    {jp:"警察を呼んでください", kr:"경찰을 불러주세요", pron:"케이사츠오 언데쿠다사이", ctx:"경찰"},
-    {jp:"病院はどこですか？", kr:"병원은 어디인가요?", pron:"뵈-인와 도코데스카?", ctx:"병원"},
-    {jp:"救急車を呼んでください", kr:"구급차를 불러주세요", pron:"큐-큐-샤오 언데쿠다사이", ctx:"구급차 (119)"},
-    {jp:"財布を盗まれました", kr:"지갑을 도둑맞았습니다", pron:"사이후오 누스마레마시타", ctx:"도난"},
-    {jp:"アレルギーがあります", kr:"알레르기가 있습니다", pron:"아레루기-가 아리마스", ctx:"식당에서 알릴 때"},
-    {jp:"熱があります", kr:"열이 있습니다", pron:"네츠가 아리마스", ctx:"아플 때"},
-  ]},
+const categories = [
+  {
+    id:'airport', name:'공항·입국', icon:'fa-plane-arrival',
+    phrases:[
+      {jp:'すみません、入国カードはどこでもらえますか？', pron:'스미마쎈, 뉴코쿠 카도 와 도코데 모라에마스까?', kr:'실례합니다, 입국카드는 어디서 받을 수 있나요?'},
+      {jp:'韓国から来ました。', pron:'칸코쿠카라 키마시타', kr:'한국에서 왔습니다.'},
+      {jp:'観光目的です。', pron:'칸코 목테키 데스', kr:'관광 목적입니다.'},
+      {jp:'滞在期間は4泊5日です。', pron:'타이자이 키칸와 욘하쿠 이츠카 데스', kr:'체류 기간은 4박 5일입니다.'},
+      {jp:'宿泊先はホテルオークラです。', pron:'슈쿠하쿠사키와 호테루 오쿠라 데스', kr:'숙박지는 호텔 오쿠라입니다.'},
+      {jp:'荷物受取所はどこですか？', pron:'니모츠 우케토리조와 도코 데스까?', kr:'수하물 수취소는 어디인가요?'},
+      {jp:'荷物が見つかりません。', pron:'니모츠가 미츠카리마쎈', kr:'짐을 찾을 수 없습니다.'},
+      {jp:'税関申告するものはありますか？', pron:'제이칸 신코쿠스루 모노와 아리마스까?', kr:'세관 신고할 물건이 있습니까?'},
+      {jp:'申告するものはありません。', pron:'신코쿠스루 모노와 아리마쎈', kr:'신고할 물건은 없습니다.'},
+      {jp:'両替所はどこですか？', pron:'료가에조와 도코 데스까?', kr:'환전소는 어디인가요?'},
+      {jp:'円に両替お願いします。', pron:'엔니 료가에 오네가이 시마스', kr:'엔화로 환전 부탁합니다.'},
+      {jp:'空港から博多駅までどう行けますか？', pron:'쿠코카라 하카타에키마데 도 이케마스까?', kr:'공항에서 하카타역까지 어떻게 가나요?'},
+      {jp:'地下鉄の切符はどこで買えますか？', pron:'치카테츠노 킷푸와 도코데 카에마스까?', kr:'지하철 표는 어디서 살 수 있나요?'},
+      {jp:'ICOCAは使えますか？', pron:'이코카와 츠카에마스까?', kr:'ICOCA 사용 가능한가요?'},
+      {jp:'Wi-Fiはありますか？', pron:'와이파이와 아리마스까?', kr:'Wi-Fi 있나요?'},
+      {jp:'フリーWi-Fiのパスワードを教えてください。', pron:'후리 와이파이노 파스와도오 오시에테 쿠다사이', kr:'무료 Wi-Fi 비밀번호 알려주세요.'},
+      {jp:'トイレはどこですか？', pron:'토이레와 도코 데스까?', kr:'화장실이 어디인가요?'},
+      {jp:'バス乗り場はどこですか？', pron:'바스 노리바와 도코 데스까?', kr:'버스 승차장은 어디인가요?'},
+      {jp:'タクシー乗り場はどこですか？', pron:'타쿠시 노리바와 도코 데스까?', kr:'택시 승강장은 어디인가요?'},
+      {jp:'このバスは天神に行きますか？', pron:'코노 바스와 텐진니 이키마스까?', kr:'이 버스는 텐진으로 가나요?'},
+      {jp:'ポートライナーはどのホームですか？', pron:'포토 라이나와 도노 호무 데스까?', kr:'포트라이너는 몇 번 홈인가요?'},
+    ]
+  },
+  {
+    id:'hotel', name:'숙소·체크인', icon:'fa-hotel',
+    phrases:[
+      {jp:'チェックインお願いします。', pron:'체쿠인 오네가이 시마스', kr:'체크인 부탁합니다.'},
+      {jp:'予約している〇〇です。', pron:'요야쿠 시테이루 마루마루 데스', kr:'예약한 〇〇입니다.'},
+      {jp:'パスポートを見せてください。', pron:'파스포토오 미세테 쿠다사이', kr:'여권을 보여주세요.'},
+      {jp:'予約確認書はこれです。', pron:'요야쿠 카쿠닌쇼와 코레 데스', kr:'예약 확인서는 이것입니다.'},
+      {jp:'チェックアウトは何時ですか？', pron:'체쿠아우토와 난지 데스까?', kr:'체크아웃은 몇 시인가요?'},
+      {jp:'朝食は何時からですか？', pron:'쵸쇼쿠와 난지카라 데스까?', kr:'조식은 몇 시부터인가요?'},
+      {jp:'朝食は含まれていますか？', pron:'쵸쇼쿠와 후쿠마레테 이마스까?', kr:'조식이 포함되어 있나요?'},
+      {jp:'Wi-Fiのパスワードを教えてください。', pron:'와이파이노 파스와도오 오시에테 쿠다사이', kr:'Wi-Fi 비밀번호 알려주세요.'},
+      {jp:'部屋のWi-Fiが繋がりません。', pron:'헤야노 와이파이가 츠나가리마쎈', kr:'방 Wi-Fi가 연결이 안 됩니다.'},
+      {jp:'荷物を預かってもらえますか？', pron:'니모츠오 아즈캇테 모라에마스까?', kr:'짐을 맡아주실 수 있나요?'},
+      {jp:'荷物を部屋に運んでください。', pron:'니모츠오 헤야니 하콘데 쿠다사이', kr:'짐을 방으로 옮겨주세요.'},
+      {jp:'タオルを追加でお願いします。', pron:'타오루오 츠이카데 오네가이 시마스', kr:'수건을 추가로 부탁합니다.'},
+      {jp:'枕をもう一つお願いします。', pron:'마쿠라오 모 히토츠 오네가이 시마스', kr:'베개를 하나 더 부탁합니다.'},
+      {jp:'部屋が暑い/寒いです。', pron:'헤야가 아츠이/사무이 데스', kr:'방이 덥습니다/춥습니다.'},
+      {jp:'エアコンの使い方を教えてください。', pron:'에아콘노 츠카이카타오 오시에테 쿠다사이', kr:'에어컨 사용법 알려주세요.'},
+      {jp:'近くにコンビニはありますか？', pron:'치카쿠니 콘비니와 아리마스까?', kr:'근처에 편의점이 있나요?'},
+      {jp:'カードで支払えますか？', pron:'카도데 시하라에마스까?', kr:'카드로 결제 가능한가요?'},
+      {jp:'現金で支払います。', pron:'겡킨데 시하라이마스', kr:'현금으로 결제하겠습니다.'},
+      {jp:'レートチェックアウトはできますか？', pron:'레이토 체쿠아우토와 데키마스까?', kr:'레이트 체크아웃 가능한가요?'},
+      {jp:'タクシーを呼んでください。', pron:'타쿠시오 욘데 쿠다사이', kr:'택시 불러주세요.'},
+      {jp:'ルームキーを部屋に忘れました。', pron:'루무키오 헤야니 와스레마시타', kr:'방 열쇠를 방에 두고 나왔습니다.'},
+    ]
+  },
+  {
+    id:'restaurant', name:'식당·음식점', icon:'fa-utensils',
+    phrases:[
+      {jp:'すみません、メニューお願いします。', pron:'스미마쎈, 메뉴 오네가이 시마스', kr:'실례합니다, 메뉴판 부탁합니다.'},
+      {jp:'何人ですか？ー2人です。', pron:'난닌 데스까? — 후타리 데스', kr:'몇 분이세요? — 2명입니다.'},
+      {jp:'テーブル席お願いします。', pron:'테부루 세키 오네가이 시마스', kr:'테이블 자리 부탁합니다.'},
+      {jp:'カウンター席でもいいです。', pron:'카운타 세키 데모 이이 데스', kr:'카운터 자리도 괜찮습니다.'},
+      {jp:'おすすめは何ですか？', pron:'오스스메와 난 데스까?', kr:'추천 메뉴가 뭐예요?'},
+      {jp:'これをください。', pron:'코레오 쿠다사이', kr:'이것 주세요.'},
+      {jp:'これとこれをください。', pron:'코레토 코레오 쿠다사이', kr:'이것과 이것 주세요.'},
+      {jp:'一人前お願いします。', pron:'이치닌마에 오네가이 시마스', kr:'1인분 부탁합니다.'},
+      {jp:'シェアしてもいいですか？', pron:'셰아 시테모 이이 데스까?', kr:'나눠 먹어도 되나요?'},
+      {jp:'アレルギーがあります。', pron:'아레루기가 아리마스', kr:'알레르기가 있습니다.'},
+      {jp:'豚肉が食べられません。', pron:'부타니쿠가 타베라레마쎈', kr:'돼지고기를 못 먹습니다.'},
+      {jp:'辛くしないでください。', pron:'카라쿠 시나이데 쿠다사이', kr:'맵게 하지 마세요.'},
+      {jp:'もう少し待ってもいいですか？', pron:'모 스코시 마테모 이이 데스까?', kr:'조금 더 기다려도 되나요?'},
+      {jp:'お水ください。', pron:'오미즈 쿠다사이', kr:'물 주세요.'},
+      {jp:'おかわりお願いします。', pron:'오카와리 오네가이 시마스', kr:'리필 부탁합니다.'},
+      {jp:'お会計お願いします。', pron:'오카이케이 오네가이 시마스', kr:'계산서 부탁합니다.'},
+      {jp:'別々に支払えますか？', pron:'베츠베츠니 시하라에마스까?', kr:'따로 결제할 수 있나요?'},
+      {jp:'割り勘にしてください。', pron:'와리칸니 시테 쿠다사이', kr:'더치페이로 해주세요.'},
+      {jp:'カードで払えますか？', pron:'카도데 하라에마스까?', kr:'카드로 결제 가능한가요?'},
+      {jp:'とてもおいしかったです。', pron:'토테모 오이시캇타 데스', kr:'정말 맛있었습니다.'},
+      {jp:'ごちそうさまでした。', pron:'고치소 사마 데시타', kr:'잘 먹었습니다.'},
+      {jp:'テイクアウトお願いします。', pron:'테이쿠아우토 오네가이 시마스', kr:'포장 부탁합니다.'},
+    ]
+  },
+  {
+    id:'shopping', name:'쇼핑·면세', icon:'fa-bag-shopping',
+    phrases:[
+      {jp:'これのサイズはありますか？', pron:'코레노 사이즈와 아리마스까?', kr:'이것 사이즈 있나요?'},
+      {jp:'もっと大きいサイズはありますか？', pron:'모 오키이 사이즈와 아리마스까?', kr:'더 큰 사이즈 있나요?'},
+      {jp:'試着してもいいですか？', pron:'시착쿠 시테모 이이 데스까?', kr:'입어봐도 되나요?'},
+      {jp:'試着室はどこですか？', pron:'시착쿠시츠와 도코 데스까?', kr:'탈의실이 어디인가요?'},
+      {jp:'色違いはありますか？', pron:'이로치가이와 아리마스까?', kr:'다른 색상이 있나요?'},
+      {jp:'いくらですか？', pron:'이쿠라 데스까?', kr:'얼마인가요?'},
+      {jp:'少し安くなりませんか？', pron:'스코시 야스쿠나리마쎄까?', kr:'조금 깎아주실 수 있나요?'},
+      {jp:'税抜き価格はいくらですか？', pron:'제이누키 카카쿠와 이쿠라 데스까?', kr:'세금 제외 가격이 얼마인가요?'},
+      {jp:'免税できますか？', pron:'멘제이 데키마스까?', kr:'면세 가능한가요?'},
+      {jp:'パスポート持っています。', pron:'파스포토 모테이마스', kr:'여권 가지고 있습니다.'},
+      {jp:'免税手続きお願いします。', pron:'멘제이 테츠즈키 오네가이 시마스', kr:'면세 수속 부탁합니다.'},
+      {jp:'袋をお願いします。', pron:'후쿠로오 오네가이 시마스', kr:'봉투 부탁합니다.'},
+      {jp:'ギフトラッピングお願いします。', pron:'기프토 랏핑구 오네가이 시마스', kr:'선물 포장 부탁합니다.'},
+      {jp:'返品できますか？', pron:'헨핀 데키마스까?', kr:'반품 가능한가요?'},
+      {jp:'交換できますか？', pron:'코칸 데키마스까?', kr:'교환 가능한가요?'},
+      {jp:'レシートをなくしました。', pron:'레시토오 나쿠시마시타', kr:'영수증을 잃어버렸습니다.'},
+      {jp:'クーポンは使えますか？', pron:'쿠폰와 츠카에마스까?', kr:'쿠폰 사용 가능한가요?'},
+      {jp:'ポイントカードはありますか？', pron:'포인토 카도와 아리마스까?', kr:'포인트 카드 있나요?'},
+      {jp:'支払いはカードでいいですか？', pron:'시하라이와 카도데 이이 데스까?', kr:'결제는 카드로 되나요?'},
+      {jp:'SUICAは使えますか？', pron:'스이카와 츠카에마스까?', kr:'SUICA 사용 가능한가요?'},
+      {jp:'これは日本限定ですか？', pron:'코레와 니혼 겐테이 데스까?', kr:'이것은 일본 한정인가요?'},
+    ]
+  },
+  {
+    id:'transport', name:'교통·지하철', icon:'fa-train-subway',
+    phrases:[
+      {jp:'博多駅までどう行けばいいですか？', pron:'하카타에키마데 도 이케바 이이 데스까?', kr:'하카타역까지 어떻게 가면 되나요?'},
+      {jp:'天神駅まで何分かかりますか？', pron:'텐진에키마데 난푼 카카리마스까?', kr:'텐진역까지 몇 분 걸리나요?'},
+      {jp:'乗り換えは必要ですか？', pron:'노리카에와 히츠요 데스까?', kr:'환승이 필요한가요?'},
+      {jp:'どこで乗り換えますか？', pron:'도코데 노리카에마스까?', kr:'어디서 환승하나요?'},
+      {jp:'切符を買いたいです。', pron:'킷푸오 카이타이 데스', kr:'표를 사고 싶습니다.'},
+      {jp:'一日乗車券はありますか？', pron:'이치니치 죠샤켄와 아리마스까?', kr:'1일 승차권이 있나요?'},
+      {jp:'この切符は使えますか？', pron:'코노 킷푸와 츠카에마스까?', kr:'이 표 사용 가능한가요?'},
+      {jp:'地下鉄の路線図をください。', pron:'치카테츠노 로센즈오 쿠다사이', kr:'지하철 노선도 주세요.'},
+      {jp:'西新駅はどのホームですか？', pron:'니시진에키와 도노 호무 데스까?', kr:'니시진역은 몇 번 홈인가요?'},
+      {jp:'次の駅はどこですか？', pron:'츠기노에키와 도코 데스까?', kr:'다음 역은 어디인가요?'},
+      {jp:'出口はどっちですか？', pron:'데구치와 돗치 데스까?', kr:'출구가 어느 쪽인가요?'},
+      {jp:'バスは何番乗り場ですか？', pron:'바스와 난반 노리바 데스까?', kr:'버스는 몇 번 승차장인가요?'},
+      {jp:'タクシーを呼んでください。', pron:'타쿠시오 욘데 쿠다사이', kr:'택시 불러주세요.'},
+      {jp:'ここまで行ってください。', pron:'코코마데 잇테 쿠다사이', kr:'여기까지 가주세요.'},
+      {jp:'メーター制ですか？', pron:'메타 세이 데스까?', kr:'미터제인가요?'},
+      {jp:'領収書をください。', pron:'료슈쇼오 쿠다사이', kr:'영수증 주세요.'},
+      {jp:'近くで降ろしてください。', pron:'치카쿠데 오로시테 쿠다사이', kr:'근처에서 내려주세요.'},
+      {jp:'駅まで歩いて行けますか？', pron:'에키마데 아루이테 이케마스까?', kr:'역까지 걸어서 갈 수 있나요?'},
+      {jp:'ICOCAにチャージしたいです。', pron:'이코카니 챠지 시타이 데스', kr:'ICOCA에 충전하고 싶습니다.'},
+      {jp:'精算機はどこですか？', pron:'세이산키와 도코 데스까?', kr:'정산기는 어디인가요?'},
+      {jp:'終電は何時ですか？', pron:'슈덴와 난지 데스까?', kr:'막차가 몇 시인가요?'},
+    ]
+  },
+  {
+    id:'sightseeing', name:'관광·길찾기', icon:'fa-torii-gate',
+    phrases:[
+      {jp:'観光案内所はどこですか？', pron:'칸코 안나이조와 도코 데스까?', kr:'관광 안내소가 어디인가요?'},
+      {jp:'おすすめの観光スポットを教えてください。', pron:'오스스메노 칸코 스폿토오 오시에테 쿠다사이', kr:'추천 관광지 알려주세요.'},
+      {jp:'太宰府天満宮に行きたいです。', pron:'다자이후 텐만구니 이키타이 데스', kr:'다자이후 텐만궁에 가고 싶습니다.'},
+      {jp:'櫛田神社は近いですか？', pron:'쿠시다 진자와 치카이 데스까?', kr:'쿠시다 신사가 가까운가요?'},
+      {jp:'キャナルシティ博多へ行く道を教えてください。', pron:'캬나루 시티 하카타에 이쿠 미치오 오시에테 쿠다사이', kr:'캐널시티 하카타 가는 길 알려주세요.'},
+      {jp:'ここから歩いて行けますか？', pron:'코코카라 아루이테 이케마스까?', kr:'여기서 걸어서 갈 수 있나요?'},
+      {jp:'徒歩で何分ぐらいですか？', pron:'토포데 난푼 구라이 데스까?', kr:'도보로 몇 분 정도인가요?'},
+      {jp:'右に曲がってください。', pron:'미기니 마캇테 쿠다사이', kr:'오른쪽으로 꺾어주세요.'},
+      {jp:'左に曲がってください。', pron:'히다리니 마캇테 쿠다사이', kr:'왼쪽으로 꺾어주세요.'},
+      {jp:'まっすぐ行ってください。', pron:'맛스구 잇테 쿠다사이', kr:'직진해주세요.'},
+      {jp:'地図で教えてもらえますか？', pron:'치즈데 오시에테 모라에마스까?', kr:'지도로 알려주실 수 있나요?'},
+      {jp:'写真を撮ってもいいですか？', pron:'샤신오 못테모 이이 데스까?', kr:'사진 찍어도 되나요?'},
+      {jp:'写真を撮ってください。', pron:'샤신오 못테 쿠다사이', kr:'사진 찍어주세요.'},
+      {jp:'一緒に写真を撮りませんか？', pron:'잇쇼니 샤신오 토리마쎄까?', kr:'같이 사진 찍을래요?'},
+      {jp:'入場料はいくらですか？', pron:'뉴죠료와 이쿠라 데스까?', kr:'입장료가 얼마인가요?'},
+      {jp:'割引はありますか？', pron:'와리비키와 아리마스까?', kr:'할인이 있나요?'},
+      {jp:'何時まで開いていますか？', pron:'난지마데 아이테 이마스까?', kr:'몇 시까지 열었나요?'},
+      {jp:'休みの日はいつですか？', pron:'야스미노 히와 이츠 데스까?', kr:'쉬는 날이 언제인가요?'},
+      {jp:'今何時ですか？', pron:'이마 난지 데스까?', kr:'지금 몇 시인가요?'},
+      {jp:'ここはどこですか？', pron:'코코와 도코 데스까?', kr:'여기가 어디인가요?'},
+      {jp:'道に迷いました。', pron:'미치니 마요이마시타', kr:'길을 잃었습니다.'},
+    ]
+  },
+  {
+    id:'convenience', name:'편의점·마트', icon:'fa-store',
+    phrases:[
+      {jp:'いらっしゃいませ。', pron:'이랏샤이마세', kr:'어서 오세요.'},
+      {jp:'お弁当はどこですか？', pron:'오벤토와 도코 데스까?', kr:'도시락이 어디인가요?'},
+      {jp:'温めてもらえますか？', pron:'아타타메테 모라에마스까?', kr:'데워주실 수 있나요?'},
+      {jp:'お箸をください。', pron:'오하시오 쿠다사이', kr:'젓가락 주세요.'},
+      {jp:'スプーンをください。', pron:'스푸노 쿠다사이', kr:'숟가락 주세요.'},
+      {jp:'ストローをください。', pron:'스토로오 쿠다사이', kr:'빨대 주세요.'},
+      {jp:'袋は要りません。', pron:'후쿠로와 이리마쎈', kr:'봉투 필요 없습니다.'},
+      {jp:'レジ袋は有料ですか？', pron:'레지부쿠로와 유료 데스까?', kr:'비닐봉투 유료인가요?'},
+      {jp:'電子レンジは使えますか？', pron:'덴시 렌지와 츠카에마스까?', kr:'전자레인지 사용 가능한가요?'},
+      {jp:'イートインスペースはありますか？', pron:'이토인 스페이스와 아리마스까?', kr:'매장 식사 공간이 있나요?'},
+      {jp:'タバコはどこで売っていますか？', pron:'타바코와 도코데 우테 이마스까?', kr:'담배는 어디서 팔나요?'},
+      {jp:'お酒はどこですか？', pron:'오사케와 도코 데스까?', kr:'술 코너가 어디인가요?'},
+      {jp:'年齢確認します。20歳以上です。', pron:'넨레이 카쿠닌 시마스. 하타치 이조 데스', kr:'나이 확인합니다. 20세 이상입니다.'},
+      {jp:'コピー機はありますか？', pron:'코피키와 아리마스까?', kr:'복사기 있나요?'},
+      {jp:'切手は売っていますか？', pron:'킷테와 우테 이마스까?', kr:'우표 팔고 있나요?'},
+      {jp:'はがきをください。', pron:'하가키오 쿠다사이', kr:'엽서 주세요.'},
+      {jp:'ゴミ箱はどこですか？', pron:'고미바코와 도코 데스까?', kr:'쓰레기통이 어디인가요?'},
+      {jp:'雨傘はありますか？', pron:'아마가사와 아리마스까?', kr:'우산 있나요?'},
+      {jp:'充電器はありますか？', pron:'쥬덴키와 아리마스까?', kr:'충전기 있나요?'},
+      {jp:'ポイントカードを作りたいです。', pron:'포인토 카도오 츠쿠리타이 데스', kr:'포인트 카드 만들고 싶습니다.'},
+      {jp:'商品を探しているのですが。', pron:'쇼힌오 사가시테 이루노 데스가', kr:'상품을 찾고 있는데요.'},
+    ]
+  },
+  {
+    id:'cafe', name:'카페·디저트', icon:'fa-mug-hot',
+    phrases:[
+      {jp:'テーブル席に座ってもいいですか？', pron:'테부루 세키니 스왓테모 이이 데스까?', kr:'테이블에 앉아도 되나요?'},
+      {jp:'メニューを見せてください。', pron:'메뉴오 미세테 쿠다사이', kr:'메뉴 보여주세요.'},
+      {jp:'アイスコーヒーを一つお願いします。', pron:'아이스 코히오 히토츠 오네가이 시마스', kr:'아이스 커피 하나 부탁합니다.'},
+      {jp:'ホットラテをお願いします。', pron:'혿토 라테오 오네가이 시마스', kr:'핫 라떼 부탁합니다.'},
+      {jp:'抹茶ラテはありますか？', pron:'맛차 라테와 아리마스까?', kr:'말차 라떼 있나요?'},
+      {jp:'砂糖なしでください。', pron:'사토 나시데 쿠다사이', kr:'설탕 빼고 주세요.'},
+      {jp:'ミルクを別でください。', pron:'미루쿠오 베츠데 쿠다사이', kr:'우유 따로 주세요.'},
+      {jp:'ケーキセットにできますか？', pron:'케키 셋토니 데키마스까?', kr:'케이크 세트로 가능한가요?'},
+      {jp:'テイクアウトでお願いします。', pron:'테이쿠아우토데 오네가이 시마스', kr:'포장으로 부탁합니다.'},
+      {jp:'店内で食べます。', pron:'텐나이데 타베마스', kr:'매장에서 먹겠습니다.'},
+      {jp:'Wi-Fiのパスワードはありますか？', pron:'와이파이노 파스와도와 아리마스까?', kr:'Wi-Fi 비밀번호 있나요?'},
+      {jp:'コンセントはありますか？', pron:'콘센토와 아리마스까?', kr:'콘센트 있나요?'},
+      {jp:'水のおかわりはありますか？', pron:'미즈노 오카와리와 아리마스까?', kr:'물 리필 되나요?'},
+      {jp:'抹茶アイスをください。', pron:'맛차 아이스오 쿠다사이', kr:'말차 아이스크림 주세요.'},
+      {jp:'一番人気のデザートは何ですか？', pron:'이치반 닌키노 데자토와 난 데스까?', kr:'가장 인기 있는 디저트가 뭔가요?'},
+      {jp:'甘さ控えめのものはありますか？', pron:'아마사 히카에메노 모노와 아리마스까?', kr:'당도가 낮은 것이 있나요?'},
+      {jp:'アレルギー表示はありますか？', pron:'아레루기 효지와 아리마스까?', kr:'알레르기 표시가 있나요?'},
+      {jp:'すみません、注文お願いします。', pron:'스미마쎈, 츄몬 오네가이 시마스', kr:'실례합니다, 주문 부탁합니다.'},
+      {jp:'お会計お願いします。', pron:'오카이케이 오네가이 시마스', kr:'계산 부탁합니다.'},
+      {jp:'とても美味しかったです。', pron:'토테모 오이시캇타 데스', kr:'정말 맛있었습니다.'},
+    ]
+  },
+  {
+    id:'hotspring', name:'온천·목욕', icon:'fa-hot-tub-person',
+    phrases:[
+      {jp:'温泉は何時から何時までですか？', pron:'온센와 난지카라 난지마데 데스까?', kr:'온천은 몇 시부터 몇 시까지인가요?'},
+      {jp:'貸切風呂はありますか？', pron:'카시키리 부로와 아리마스까?', kr:'가족탕/대관탕이 있나요?'},
+      {jp:'タオルはありますか？', pron:'타오루와 아리마스까?', kr:'수건이 있나요?'},
+      {jp:'バスタオルは別料金ですか？', pron:'바스타오루와 베츠 료킨 데스까?', kr:'바스타올은 별도 요금인가요?'},
+      {jp:'入浴料はいくらですか？', pron:'뉴요쿠료와 이쿠라 데스까?', kr:'입욕료가 얼마인가요?'},
+      {jp:'タトゥーがあっても入れますか？', pron:'타투가 앗테모 하이레마스까?', kr:'문신이 있어도 들어갈 수 있나요?'},
+      {jp:'タトゥーシールで隠せば大丈夫ですか？', pron:'타투 시루데 카쿠세바 다이죠부 데스까?', kr:'타투 실로 가리면 괜찮나요?'},
+      {jp:'男女入れ替えはありますか？', pron:'단죠 이레카에와 아리마스까?', kr:'남녀 교대가 있나요?'},
+      {jp:'サウナはありますか？', pron:'사우나와 아리마스까?', kr:'사우나가 있나요?'},
+      {jp:'水風呂はありますか？', pron:'미즈부로와 아리마스까?', kr:'냉탕이 있나요?'},
+      {jp:'体を洗ってから入ってください。', pron:'카라다오 아랏테카라 하잇테 쿠다사이', kr:'몸을 씻고 들어가주세요.'},
+      {jp:'タオルをお湯に入れないでください。', pron:'타오루오 오유니 이레나이데 쿠다사이', kr:'수건을 온천물에 넣지 마세요.'},
+      {jp:'髪を束ねてください。', pron:'카미오 타바네테 쿠다사이', kr:'머리를 묶어주세요.'},
+      {jp:'着替え室はどこですか？', pron:'키가에시츠와 도코 데스까?', kr:'탈의실이 어디인가요?'},
+      {jp:'ロッカーの鍵をなくしました。', pron:'롯카노 카기오 나쿠시마시타', kr:'라커 열쇠를 잃어버렸습니다.'},
+      {jp:'ドライヤーはありますか？', pron:'도라이야와 아리마스까?', kr:'드라이어 있나요?'},
+      {jp:'化粧水はありますか？', pron:'케쇼스이와 아리마스까?', kr:'스킨로션 있나요?'},
+      {jp:'泉質は何ですか？', pron:'센시츠와 난 데스까?', kr:'온천 수질이 뭔가요?'},
+      {jp:'泉源掛け流しですか？', pron:'센겐 카케나가시 데스까?', kr:'원천 솟는 온천인가요?'},
+      {jp:'お風呂上がりにビールを飲みたいです。', pron:'오후로 아가리니 비루오 노미타이 데스', kr:'목욕 후 맥주 마시고 싶습니다.'},
+    ]
+  },
+  {
+    id:'emergency', name:'응급·병원', icon:'fa-kit-medical',
+    phrases:[
+      {jp:'助けてください！', pron:'타스케테 쿠다사이!', kr:'도와주세요!'},
+      {jp:'警察を呼んでください。', pron:'케이사츠오 욘데 쿠다사이', kr:'경찰 불러주세요.'},
+      {jp:'救急車を呼んでください。', pron:'큐큐샤오 욘데 쿠다사이', kr:'구급차 불러주세요.'},
+      {jp:'消防車を呼んでください。', pron:'쇼보샤오 욘데 쿠다사이', kr:'소방차 불러주세요.'},
+      {jp:'火事です！', pron:'카지 데스!', kr:'불이야!'},
+      {jp:'泥棒です！', pron:'도로보 데스!', kr:'도둑이야!'},
+      {jp:'財布を盗まれました。', pron:'사이후오 누스마레마시타', kr:'지갑을 도둑맞았습니다.'},
+      {jp:'パスポートをなくしました。', pron:'파스포토오 나쿠시마시타', kr:'여권을 잃어버렸습니다.'},
+      {jp:'韓国大使館の電話番号を教えてください。', pron:'칸코쿠 타이시칸노 덴와 반고오 오시에테 쿠다사이', kr:'한국 대사관 전화번호 알려주세요.'},
+      {jp:'体調が悪いです。', pron:'타이초가 와루이 데스', kr:'몸이 안 좋습니다.'},
+      {jp:'頭が痛いです。', pron:'아타마가 이타이 데스', kr:'머리가 아픕니다.'},
+      {jp:'腹が痛いです。', pron:'하라가 이타이 데스', kr:'배가 아픕니다.'},
+      {jp:'熱があります。', pron:'네츠가 아리마스', kr:'열이 있습니다.'},
+      {jp:'薬を飲みたいです。', pron:'쿠스리오 노미타이 데스', kr:'약을 먹고 싶습니다.'},
+      {jp:'病院に行きたいです。', pron:'뵤인니 이키타이 데스', kr:'병원에 가고 싶습니다.'},
+      {jp:'韓国語ができる医者はいますか？', pron:'칸코쿠고가 데키루 이샤와 이마스까?', kr:'한국어가 가능한 의사가 있나요?'},
+      {jp:'アレルギーがあります。', pron:'아레루기가 아리마스', kr:'알레르기가 있습니다.'},
+      {jp:'今飲んでいる薬はこれです。', pron:'이마 논데 이루 쿠스리와 코레 데스', kr:'현재 먹고 있는 약은 이것입니다.'},
+      {jp:'保険は加入しています。', pron:'호켄와 칸뉴 시테 이마스', kr:'보험에 가입되어 있습니다.'},
+      {jp:'診断書をください。', pron:'신단쇼오 쿠다사이', kr:'진단서 주세요.'},
+      {jp:'領収書をください。保険請求に使います。', pron:'료슈쇼오 쿠다사이. 호켄 세이큐니 츠카이마스', kr:'영수증 주세요. 보험 청구에 씁니다.'},
+      {jp:'携帯電話をなくしました。', pron:'케이타이 덴와오 나쿠시마시타', kr:'휴대전화를 잃어버렸습니다.'},
+    ]
+  },
 ];
 
-let curCat = "전체";
+let currentCategory = 'airport';
+let searchQuery = '';
+const totalCount = categories.reduce((sum, cat) => sum + cat.phrases.length, 0);
 
-function render() {
-  const q = document.getElementById("search").value.toLowerCase();
-  const list = document.getElementById("list");
-  let html = "";
-  let count = 0;
+function animateCounter(el, target) {
+  let current = 0;
+  const step = Math.max(1, Math.floor(target / 40));
+  const timer = setInterval(() => {
+    current += step;
+    if (current >= target) { current = target; clearInterval(timer); }
+    el.textContent = current;
+  }, 30);
+}
 
-  data.forEach(cat => {
-    if (curCat !== "전체" && curCat !== cat.cat) return;
-    const items = cat.items.filter(it =>
-      !q || it.jp.toLowerCase().includes(q) || it.kr.includes(q) || it.pron.includes(q) || it.ctx.includes(q)
-    );
-    if (items.length === 0) return;
-    count += items.length;
-    html += `<h2>${cat.cat}</h2>`;
-    items.forEach(it => {
-      html += `<div class="item" onclick="speak('${it.jp.replace(/'/g,"\\'")}')">
-        <div class="jp">${it.jp}</div>
-        <div class="pron">${it.pron}</div>
-        <div class="kr">${it.kr}</div>
-        <div class="ctx">${it.ctx}</div>
-      </div>`;
+function renderTabs() {
+  const container = document.getElementById('catTabs');
+  container.innerHTML = categories.map(cat =>
+    `<button class="cat-tab ${cat.id === currentCategory ? 'active' : ''}" data-cat="${cat.id}">
+      <i class="fas ${cat.icon} tab-icon"></i>
+      <span>${cat.name}</span>
+    </button>`
+  ).join('');
+  container.querySelectorAll('.cat-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      currentCategory = tab.dataset.cat;
+      searchQuery = '';
+      document.getElementById('searchInput').value = '';
+      document.getElementById('searchCount').textContent = '';
+      renderTabs();
+      renderSections();
+      window.scrollTo({ top: document.getElementById('phraseSections').offsetTop - 80, behavior: 'smooth' });
     });
   });
-
-  list.innerHTML = count ? html : '<div class="no-result">검색 결과가 없습니다</div>';
 }
 
-function speak(text) {
-  speechSynthesis.cancel();
-  const u = new SpeechSynthesisUtterance(text);
-  u.lang = "ja-JP";
-  u.rate = 0.85;
-  speechSynthesis.speak(u);
+function escapeAttr(str) { return str.replace(/"/g, '&quot;').replace(/'/g, '&#39;'); }
+
+function highlightText(text, query) {
+  if (!query) return text;
+  const idx = text.toLowerCase().indexOf(query.toLowerCase());
+  if (idx === -1) return text;
+  return text.slice(0, idx) + '<span class="highlight">' + text.slice(idx, idx + query.length) + '</span>' + text.slice(idx + query.length);
 }
 
-// tabs
-const tabsEl = document.getElementById("tabs");
-const cats = ["전체", ...data.map(c => c.cat)];
-tabsEl.innerHTML = cats.map(c =>
-  `<span class="tab${c==="전체"?" on":""}" onclick="curCat='${c}';document.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));this.classList.add('on');render()">${c}</span>`
-).join("");
+function renderSections() {
+  const container = document.getElementById('phraseSections');
+  const query = searchQuery.toLowerCase();
+  container.innerHTML = categories.map(cat => {
+    let filtered = cat.phrases;
+    if (query) {
+      filtered = cat.phrases.filter(p =>
+        p.jp.toLowerCase().includes(query) ||
+        p.kr.toLowerCase().includes(query) ||
+        p.pron.toLowerCase().includes(query)
+      );
+    }
+    const isActive = query ? filtered.length > 0 : cat.id === currentCategory;
+    if (!isActive) return '';
+    return `
+      <section class="phrase-section ${isActive ? 'active' : ''}" data-section="${cat.id}">
+        <div class="section-header">
+          <div class="section-icon"><i class="fas ${cat.icon}"></i></div>
+          <h2 class="section-title">${cat.name}</h2>
+          <span class="section-count">${filtered.length}개 표현</span>
+        </div>
+        <div class="phrase-grid">
+          ${filtered.map((p, i) => `
+            <div class="phrase-card" data-jp="${escapeAttr(p.jp)}" style="animation-delay:${i * 0.03}s">
+              <span class="card-num">${i + 1}</span>
+              <div class="jp-text">${highlightText(p.jp, query)}</div>
+              <div class="pron-text">${highlightText(p.pron, query)}</div>
+              <div class="kr-text">${highlightText(p.kr, query)}</div>
+              <button class="copy-btn" title="복사" aria-label="일본어 복사"><i class="fas fa-copy"></i></button>
+            </div>
+          `).join('')}
+        </div>
+      </section>
+    `;
+  }).join('');
 
-render();
+  container.querySelectorAll('.phrase-card').forEach(card => {
+    card.addEventListener('click', (e) => {
+      if (e.target.closest('.copy-btn')) {
+        copyToClipboard(card.dataset.jp);
+        showToast('클립보드에 복사되었습니다');
+        return;
+      }
+      copyToClipboard(card.dataset.jp);
+      showToast('일본어 문장이 복사되었습니다');
+    });
+  });
+}
+
+async function copyToClipboard(text) {
+  try { await navigator.clipboard.writeText(text); }
+  catch {
+    const ta = document.createElement('textarea');
+    ta.value = text; ta.style.position = 'fixed'; ta.style.left = '-9999px';
+    document.body.appendChild(ta); ta.select(); document.execCommand('copy');
+    document.body.removeChild(ta);
+  }
+}
+
+function showToast(msg) {
+  const toast = document.getElementById('toast');
+  document.getElementById('toastMsg').textContent = msg;
+  toast.classList.add('show');
+  clearTimeout(showToast._timer);
+  showToast._timer = setTimeout(() => toast.classList.remove('show'), 2000);
+}
+
+function createSakura() {
+  const container = document.getElementById('sakuraContainer');
+  const count = Math.min(25, Math.floor(window.innerWidth / 60));
+  for (let i = 0; i < count; i++) {
+    const petal = document.createElement('div');
+    petal.className = 'sakura';
+    petal.style.left = Math.random() * 100 + '%';
+    petal.style.animationDuration = (8 + Math.random() * 12) + 's';
+    petal.style.animationDelay = (Math.random() * 15) + 's';
+    petal.style.width = (8 + Math.random() * 10) + 'px';
+    petal.style.height = (8 + Math.random() * 10) + 'px';
+    container.appendChild(petal);
+  }
+}
+
+document.getElementById('searchInput').addEventListener('input', (e) => {
+  searchQuery = e.target.value.trim();
+  if (searchQuery) {
+    const totalResults = categories.reduce((sum, cat) =>
+      sum + cat.phrases.filter(p =>
+        p.jp.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        p.kr.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        p.pron.toLowerCase().includes(searchQuery.toLowerCase())
+      ).length, 0);
+    document.getElementById('searchCount').textContent = `검색 결과: ${totalResults}개 표현`;
+  } else {
+    document.getElementById('searchCount').textContent = '';
+  }
+  renderSections();
+});
+
+const scrollTopBtn = document.getElementById('scrollTopBtn');
+window.addEventListener('scroll', () => {
+  scrollTopBtn.classList.toggle('visible', window.scrollY > 400);
+});
+scrollTopBtn.addEventListener('click', () => {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+  createSakura();
+  renderTabs();
+  renderSections();
+  animateCounter(document.getElementById('statTotal'), totalCount);
+});
 </script>
 </body>
 </html>
