@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>후쿠오카 여행 일본어</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: #fff;
+      color: #222;
+      font-family: -apple-system, 'Noto Sans KR', sans-serif;
+      font-size: 15px;
+      line-height: 1.6;
+      padding: 20px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    h1 { font-size: 22px; font-weight: 700; margin-bottom: 4px; }
+    .sub { color: #888; font-size: 13px; margin-bottom: 30px; }
+    h2 {
+      font-size: 16px;
+      font-weight: 700;
+      padding: 12px 0 6px;
+      border-bottom: 2px solid #222;
+      margin-top: 30px;
+      margin-bottom: 10px;
+    }
+    .item {
+      padding: 10px 0;
+      border-bottom: 1px solid #eee;
+    }
+    .jp { font-size: 17px; font-weight: 600; margin-bottom: 2px; }
+    .kr { color: #333; font-weight: 500; }
+    .pron { color: #7c3aed; font-size: 13px; margin-bottom: 1px; }
+    .ctx { color: #999; font-size: 12px; }
+    .tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 20px;
+    }
+    .tab {
+      padding: 5px 12px;
+      border: 1px solid #ddd;
+      border-radius: 20px;
+      font-size: 12px;
+      cursor: pointer;
+      background: #fff;
+      color: #666;
+    }
+    .tab.on { background: #222; color: #fff; border-color: #222; }
+    .search {
+      width: 100%;
+      padding: 8px 14px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      font-size: 14px;
+      margin-bottom: 16px;
+      outline: none;
+      font-family: inherit;
+    }
+    .search:focus { border-color: #222; }
+    .tip {
+      background: #f8f8f8;
+      padding: 12px 14px;
+      border-radius: 8px;
+      margin-top: 30px;
+      font-size: 13px;
+      color: #555;
+    }
+    .tip b { color: #222; }
+    .no-result { color: #aaa; text-align: center; padding: 40px 0; font-size: 14px; }
+  </style>
+</head>
+<body>
+
+<h1>후쿠오카 여행 일본어</h1>
+<p class="sub">클릭하면 발음을 들을 수 있습니다</p>
+
+<input class="search" placeholder="검색 (예: 감사합니다, 라멘...)" id="search" oninput="render()">
+
+<div class="tabs" id="tabs"></div>
+<div id="list"></div>
+
+<div class="tip">
+  <b>후쿠오카 여행 팁</b><br>
+  • 소규모 식당은 현금만 받는 곳이 많으니 현금 준비 필수<br>
+  • 거리에 쓰레기통이 거의 없음 → 편의점 봉투 챙기기<br>
+  • 지하철 하루 정액권 600엔 (경제적)<br>
+  • 텐진·카날시티는 걸어서 이동 가능한 거리<br>
+  • 에스컬레이터는 왼쪽에 서기, 전철 안에서 통화 금지
+</div>
+
+<script>
+const data = [
+  { cat:"인사", items:[
+    {jp:"こんにちは", kr:"안녕하세요", pron:"콘니치와", ctx:"기본 인사"},
+    {jp:"ありがとうございます", kr:"감사합니다", pron:"아리가토우 고자이마스", ctx:"정중한 감사"},
+    {jp:"すみません", kr:"실례합니다 / 죄송합니다", pron:"스미마셍", ctx:"주의 끌 때, 사과할 때 둘 다"},
+    {jp:"はい / いいえ", kr:"네 / 아니요", pron:"하이 / 이이에", ctx:"기본 응답"},
+    {jp:"はじめまして", kr:"처음 뵙겠습니다", pron:"하지메마시테", ctx:"처음 만났을 때"},
+    {jp:"よろしくお願いします", kr:"잘 부탁드립니다", pron:"요로시쿠 오네가이시마스", ctx:"만능 표현"},
+  ]},
+  { cat:"공항", items:[
+    {jp:"空港からハカタ駅までどうやって行きますか？", kr:"공항에서 하카타역까지 어떻게 가나요?", pron:"쿠코우카라 하카타에키마데 도오얏테 이키마스카?", ctx:"이동방법 묻기"},
+    {jp:"地下鉄はどこですか？", kr:"지하철은 어디인가요?", pron:"치카테츠와 도코데스카?", ctx:"지하철 위치"},
+    {jp:"タクシー乗り場はどこですか？", kr:"택시 승차장은 어디인가요?", pron:"타쿠시- 노리바와 도코데스카?", ctx:"택시 탈 때"},
+    {jp:"日本円に両替してください", kr:"엔화로 환전해 주세요", pron:"니혼엔니 료오가에시테쿠다사이", ctx:"환전"},
+    {jp:"パスポートをなくしました", kr:"여권을 잃어버렸습니다", pron:"파스포-토오 나쿠시마시타", ctx:"여권 분실"},
+  ]},
+  { cat:"교통", items:[
+    {jp:"天神までいくらですか？", kr:"텐진까지 얼마인가요?", pron:"텐징마데 이쿠라데스카?", ctx:"택시 요금"},
+    {jp:"ここで降ろしてください", kr:"여기서 내려주세요", pron:"코코데 오로시테쿠다사이", ctx:"택시에서 내릴 때"},
+    {jp:"一日乗車券はありますか？", kr:"1일 승차권이 있나요?", pron:"이치니치 죠-샤켄와 아리마스카?", ctx:"정액권"},
+    {jp:"次の駅はどこですか？", kr:"다음 역은 어디인가요?", pron:"츠기노 에키와 도코데스카?", ctx:"전철에서"},
+    {jp:"天神はどちらですか？", kr:"텐진은 어디쪽인가요?", pron:"텐징와 도치라데스카?", ctx:"방향 묻기"},
+    {jp:"このバスはCanal Cityに行きますか？", kr:"이 버스는 카날시티에 가나요?", pron:"코노 바스와 캐낼 시티니 이키마스카?", ctx:"버스 노선 확인"},
+  ]},
+  { cat:"숙소", items:[
+    {jp:"チェックインお願いします", kr:"체크인 부탁드립니다", pron:"체크인 오네가이시마스", ctx:"호텔 체크인"},
+    {jp:"チェックアウトお願いします", kr:"체크아웃 부탁드립니다", pron:"체크아웃 오네가이시마스", ctx:"호텔 체크아웃"},
+    {jp:"Wi-Fiのパスワードは何ですか？", kr:"와이파이 비밀번호가 뭔가요?", pron:"와이파이노 파스와-도와 난데스카?", ctx:"와이파이"},
+    {jp:"タオルをもらえますか？", kr:"수건 받을 수 있나요?", pron:"타오루오 모라에마스카?", ctx:"추가 수건"},
+    {jp:"荷物を預かっていただけますか？", kr:"짐 맡아주실 수 있나요?", pron:"니모츠오 아즈카테이타다케마스카?", ctx:"짐 보관"},
+    {jp:"静かな部屋をお願いします", kr:"조용한 방 부탁드립니다", pron:"시즈카나 헤야오 오네가이시마스", ctx:"방 배정 요청"},
+  ]},
+  { cat:"식당", items:[
+    {jp:"メニューを見せてください", kr:"메뉴 보여주세요", pron:"메뉴오 미세테쿠다사이", ctx:"메뉴 요청"},
+    {jp:"おすすめは何ですか？", kr:"추천 메뉴가 뭔가요?", pron:"오스스메와 난데스카?", ctx:"추천 묻기"},
+    {jp:"これをください", kr:"이것 주세요", pron:"코레오 쿠다사이", ctx:"메뉴 가리키며 주문"},
+    {jp:"豚骨ラーメンを一つください", kr:"돈코츠 라멘 하나 주세요", pron:"톤코츠 라-멘오 히토츠 쿠다사이", ctx:"후쿠오카 필수!"},
+    {jp:"もつ鍋を注文したいです", kr:"모츠나베 주문하고 싶습니다", pron:"모츠나베오 추-몬시타이데스", ctx:"후쿠오카 대표 요리"},
+    {jp:"水をください", kr:"물 주세요", pron:"미즈오 쿠다사이", ctx:"물 요청"},
+    {jp:"辛くしないでください", kr:"맵게 하지 말아주세요", pron:"카라쿠시나이데쿠다사이", ctx:"맵기 조절"},
+    {jp:"お会計お願いします", kr:"계산 부탁드립니다", pron:"오카이케이 오네가이시마스", ctx:"계산"},
+    {jp:"クレジットカードは使えますか？", kr:"신용카드 쓸 수 있나요?", pron:"쿠레짓토카-도와 츠카에마스카?", ctx:"카드 결제"},
+    {jp:"持ち帰りできますか？", kr:"포장할 수 있나요?", pron:"모치카에리 데키마스카?", ctx:"포장"},
+  ]},
+  { cat:"쇼핑", items:[
+    {jp:"いくらですか？", kr:"얼마인가요?", pron:"이쿠라데스카?", ctx:"가격 묻기"},
+    {jp:"これを見せてください", kr:"이것 보여주세요", pron:"코레오 미세테쿠다사이", ctx:"상품 보기"},
+    {jp:"試着してもいいですか？", kr:"입어봐도 되나요?", pron:"시참시테모 이-데스카?", ctx:"피팅룸"},
+    {jp:"サイズはありますか？", kr:"사이즈 있나요?", pron:"사이즈와 아리마스카?", ctx:"재고 확인"},
+    {jp:"免税できますか？", kr:"면세 되나요?", pron:"멘제이 데키마스카?", ctx:"면세 (5,000엔 이상, 여권 지참)"},
+    {jp:"袋をもらえますか？", kr:"봉투 받을 수 있나요?", pron:"후쿠로오 모라에마스카?", ctx:"쇼핑백"},
+  ]},
+  { cat:"관광", items:[
+    {jp:"写真を撮ってもいいですか？", kr:"사진 찍어도 되나요?", pron:"샤신오 톳테모 이-데스카?", ctx:"촬영 허가"},
+    {jp:"写真を撮ってください", kr:"사진 찍어주세요", pron:"샤신오 톳테쿠다사이", ctx:"부탁해서 찍기"},
+    {jp:"入場料はいくらですか？", kr:"입장료는 얼마인가요?", pron:"뉴-죠-료-와 이쿠라데스카?", ctx:"입장료"},
+    {jp:"トイレはどこですか？", kr:"화장실은 어디인가요?", pron:"토이레와 도코데스카?", ctx:"매우 자주 쓰임!"},
+    {jp:"営業時間は何時からですか？", kr:"영업시간은 몇 시부터인가요?", pron:"에이교-지칸와 난지카라데스카?", ctx:"영업시간"},
+  ]},
+  { cat:"긴급", items:[
+    {jp:"助けてください！", kr:"도와주세요!", pron:"타스케테쿠다사이!", ctx:"위급 상황"},
+    {jp:"警察を呼んでください", kr:"경찰을 불러주세요", pron:"케이사츠오 언데쿠다사이", ctx:"경찰"},
+    {jp:"病院はどこですか？", kr:"병원은 어디인가요?", pron:"뵈-인와 도코데스카?", ctx:"병원"},
+    {jp:"救急車を呼んでください", kr:"구급차를 불러주세요", pron:"큐-큐-샤오 언데쿠다사이", ctx:"구급차 (119)"},
+    {jp:"財布を盗まれました", kr:"지갑을 도둑맞았습니다", pron:"사이후오 누스마레마시타", ctx:"도난"},
+    {jp:"アレルギーがあります", kr:"알레르기가 있습니다", pron:"아레루기-가 아리마스", ctx:"식당에서 알릴 때"},
+    {jp:"熱があります", kr:"열이 있습니다", pron:"네츠가 아리마스", ctx:"아플 때"},
+  ]},
+];
+
+let curCat = "전체";
+
+function render() {
+  const q = document.getElementById("search").value.toLowerCase();
+  const list = document.getElementById("list");
+  let html = "";
+  let count = 0;
+
+  data.forEach(cat => {
+    if (curCat !== "전체" && curCat !== cat.cat) return;
+    const items = cat.items.filter(it =>
+      !q || it.jp.toLowerCase().includes(q) || it.kr.includes(q) || it.pron.includes(q) || it.ctx.includes(q)
+    );
+    if (items.length === 0) return;
+    count += items.length;
+    html += `<h2>${cat.cat}</h2>`;
+    items.forEach(it => {
+      html += `<div class="item" onclick="speak('${it.jp.replace(/'/g,"\\'")}')">
+        <div class="jp">${it.jp}</div>
+        <div class="pron">${it.pron}</div>
+        <div class="kr">${it.kr}</div>
+        <div class="ctx">${it.ctx}</div>
+      </div>`;
+    });
+  });
+
+  list.innerHTML = count ? html : '<div class="no-result">검색 결과가 없습니다</div>';
+}
+
+function speak(text) {
+  speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(text);
+  u.lang = "ja-JP";
+  u.rate = 0.85;
+  speechSynthesis.speak(u);
+}
+
+// tabs
+const tabsEl = document.getElementById("tabs");
+const cats = ["전체", ...data.map(c => c.cat)];
+tabsEl.innerHTML = cats.map(c =>
+  `<span class="tab${c==="전체"?" on":""}" onclick="curCat='${c}';document.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));this.classList.add('on');render()">${c}</span>`
+).join("");
+
+render();
+</script>
+</body>
+</html>
